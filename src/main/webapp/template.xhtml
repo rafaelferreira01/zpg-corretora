@@ -60,45 +60,57 @@
                     </ul>
                     
                         <ul class="nav nav-pills">
-                            <li class="nav-item">
-                            <h:form>
-                                <h:commandLink class="nav-link" value="Cadastrar Pet" action="#{templateMB.cadastrarPet()}" />
-                            </h:form>
-                        </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   href="#xxxx"> <i class="oi oi-cart"></i> <span>Cadastrar Adotantes</span>
-                                </a>
-                            </li>
-                            
                             <h:panelGroup rendered="#{loginMB.admin}">
                                 <li class="nav-item">
                                     <a class="nav-link"
-                                       href="#xxxx"> <i class="oi oi-cart"></i> <span>Adotar Pet</span>
+                                       href="#xxxx"> <i class="oi oi-cart"></i> <span>Investidores</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="#xxxx"> <i class="oi oi-cart"></i> <span>Empresas</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="#xxxx"> <i class="oi oi-cart"></i> <span>Relatorios (Admin)</span>
                                     </a>
                                 </li>
                             </h:panelGroup>
                             
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   href="#xxxx"> <i class="oi oi-cart"></i> <span>Acompanhar Pet</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   href="#xxxx"> <i class="oi oi-cart"></i> <span>Relatórios de Adoção</span>
-                                </a>
-                            </li>
-                        <li class="nav-item" >
-                            <h:form>
-                                <h:commandLink class="nav-link" action="#{templateMB.logout()}">
-                                    <i class="oi oi-account-logout"></i> <span>Sair</span>
-                                </h:commandLink>
-                            </h:form>
-                        </li>
+                            <h:panelGroup rendered="#{loginMB.investidor}">
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="#xxxx"> <i class="oi oi-cart"></i> <span>Ações</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="#xxxx"> <i class="oi oi-cart"></i> <span>Relatórios</span>
+                                    </a>
+                                </li>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{loginMB.admin}">
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="#xxxx"> <i class="oi oi-cart"></i> <span>Usuários</span>
+                                    </a>
+                                </li>
+                            </h:panelGroup>
 
-                    </ul>
+                            <li class="nav-item" >
+                                <h:form>
+                                    <h:commandLink class="nav-link" action="#{templateMB.logout()}">
+                                        <i class="oi oi-account-logout"></i> <span>Sair</span>
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
 
+                        </ul>
                 </nav>
             </aside>
             
