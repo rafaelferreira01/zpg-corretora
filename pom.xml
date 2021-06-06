@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.vianna.aula.jsf</groupId>
-    <artifactId>AdotaPet</artifactId>
+    <artifactId>ZPG</artifactId>
     <version>1.0.0</version>
     <name>ZPG</name>
     <description>Demo project for Spring Boot</description>

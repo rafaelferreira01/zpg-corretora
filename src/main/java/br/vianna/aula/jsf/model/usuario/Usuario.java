@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.vianna.aula.jsf.model;
+package br.vianna.aula.jsf.model.usuario;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,18 +20,20 @@ import javax.validation.constraints.NotNull;
  * @author suporte
  */
 @Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Usuario {
     
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Id
-    private int id;
+    protected int id;
     
     @NotNull
-    private String nome, email, login, senha;
+    protected String nome, email, login, senha;
     
     @NotNull
     @Enumerated(EnumType.STRING)//pra pegar a string do ENUM ao inves do indicie
-    private ETipoUsuario tipo;
+    protected ETipoUsuario tipo;
 
     public Usuario() {
     }
