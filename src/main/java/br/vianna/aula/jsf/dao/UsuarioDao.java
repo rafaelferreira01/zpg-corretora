@@ -5,10 +5,13 @@
  */
 package br.vianna.aula.jsf.dao;
 
+import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
+import br.vianna.aula.jsf.model.dto.ListaInvestidorDTO;
 import br.vianna.aula.jsf.model.usuario.Usuario;
 import br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO;
 import br.vianna.aula.jsf.model.investidor.Investidor;
 import br.vianna.aula.jsf.utils.Utils;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 public class UsuarioDao {
+    
+     private String src = "br.vianna.aula.jsf.model.dto.";
 
     @Autowired
     private EntityManager con;
@@ -72,4 +77,15 @@ public class UsuarioDao {
 
     }
 
-}
+    // MÉTODO NOVO - CHECAR QUERY
+   
+    public ArrayList<ListaInvestidorDTO> getAllInvestidores() {
+
+        Query q = con.createQuery("SELECT new " + src + "ListInvestidorDTO(i.id,i.nome,i.profissao,i.endereco,i.cpf,i.dinheiro"
+                + " from Investidor i");
+
+        return (ArrayList<ListaInvestidorDTO>) q.getResultList();
+       }
+   }
+
+

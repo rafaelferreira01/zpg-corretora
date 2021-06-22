@@ -30,6 +30,9 @@ public class Investidor extends Usuario{
     @NotNull
     private String profissao, endereco, rg, cpf;
     
+    @NotNull
+    private double dinheiro;
+    
     @OneToMany(mappedBy = "investidor")
     private List<Acao> carteiraAcoes;
 
@@ -44,7 +47,21 @@ public class Investidor extends Usuario{
         this.rg = rg;
         this.cpf = cpf;
         this.carteiraAcoes = new ArrayList<>();//nao tenho certeza se está certo
+        
     }
+    
+    // CONSTRUTOR NOVO COM DINHEIRO
+
+    public Investidor(String profissao, String endereco, String rg, String cpf, double dinheiro, List<Acao> carteiraAcoes) {
+        this.profissao = profissao;
+        this.endereco = endereco;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.dinheiro = dinheiro;
+        this.carteiraAcoes = carteiraAcoes;
+    }
+    
+    
 
     public String getProfissao() {
         return profissao;
@@ -140,6 +157,14 @@ public class Investidor extends Usuario{
 
     public void setTipo(ETipoUsuario tipo) {
         this.tipo = tipo;
+    }
+
+    public double getDinheiro() {
+        return dinheiro;
+    }
+
+    public void setDinheiro(double dinheiro) {
+        this.dinheiro = dinheiro;
     }
     
     

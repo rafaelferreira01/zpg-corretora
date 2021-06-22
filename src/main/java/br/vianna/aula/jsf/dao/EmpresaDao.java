@@ -23,6 +23,9 @@ public class EmpresaDao {
     
     @Autowired
     private EntityManager conexao;
+    
+    
+    // MÉTODO NOVO - CHECAR QUERY - POSSÍVEL CAUSA DO ERRO
 
     public ArrayList<ListaEmpresaDTO> getAllEmpresas() {
       
