@@ -1,7 +1,7 @@
 package br.vianna.aula.jsf;
 
 import br.vianna.aula.jsf.dao.UsuarioDao;
-import br.vianna.aula.jsf.model.investidor.Investidor;
+import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import br.vianna.aula.jsf.model.usuario.Usuario;
 import br.vianna.aula.jsf.utils.Utils;

@@ -9,7 +9,7 @@ import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.dto.ListaInvestidorDTO;
 import br.vianna.aula.jsf.model.usuario.Usuario;
 import br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO;
-import br.vianna.aula.jsf.model.investidor.Investidor;
+import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import br.vianna.aula.jsf.utils.Utils;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;

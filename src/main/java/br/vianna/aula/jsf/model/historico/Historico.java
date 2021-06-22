@@ -3,33 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.vianna.aula.jsf.model.acao;
+package br.vianna.aula.jsf.model.historico;
 
 import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.empresa.Empresa;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Leonardo
+ * @author suporte
  */
 @Entity
-public class Acao {
-    
+public class Historico {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Id
     private int id;
     
     @NotNull
-    private double valor;
+    @Enumerated(EnumType.STRING)//pra pegar a string do ENUM ao inves do indicie
+    private ETipoTransacao tipoTransacao;
     
+    @NotNull
+    private double valorTransacao;
+       
     @JoinColumn(name = "conta", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private Conta conta;
@@ -38,12 +44,13 @@ public class Acao {
     @ManyToOne(optional = false)
     private Empresa empresa;
 
-    public Acao() {
+    public Historico() {
     }
 
-    public Acao(int id, double valor, Conta conta, Empresa empresa) {
+    public Historico(int id, ETipoTransacao tipoTransacao, double valorTransacao, Conta conta, Empresa empresa) {
         this.id = id;
-        this.valor = valor;
+        this.tipoTransacao = tipoTransacao;
+        this.valorTransacao = valorTransacao;
         this.conta = conta;
         this.empresa = empresa;
     }
@@ -56,12 +63,20 @@ public class Acao {
         this.id = id;
     }
 
-    public double getValor() {
-        return valor;
+    public ETipoTransacao getTipoTransacao() {
+        return tipoTransacao;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setTipoTransacao(ETipoTransacao tipoTransacao) {
+        this.tipoTransacao = tipoTransacao;
+    }
+
+    public double getValorTransacao() {
+        return valorTransacao;
+    }
+
+    public void setValorTransacao(double valorTransacao) {
+        this.valorTransacao = valorTransacao;
     }
 
     public Conta getConta() {

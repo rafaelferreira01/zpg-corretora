@@ -10,7 +10,7 @@ import br.vianna.aula.jsf.dao.UsuarioDao;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.dto.ListaInvestidorDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
-import br.vianna.aula.jsf.model.investidor.Investidor;
+import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import br.vianna.aula.jsf.model.usuario.Usuario;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class CadastroInvestidorMB {
         empresa = new Empresa();
         //    animal.setNome("abc");
       //  empresa.setListaAcoes();
-        investidor.setDinheiro(500);
+//        investidor.setDinheiro(500);
         
     }
 

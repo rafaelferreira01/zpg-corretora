@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.vianna.aula.jsf.model.investidor;
+package br.vianna.aula.jsf.model.usuario.investidor;
 
 import br.vianna.aula.jsf.model.acao.Acao;
 import br.vianna.aula.jsf.model.usuario.*;
@@ -29,15 +29,8 @@ public class Investidor extends Usuario{
     
     @NotNull
     private String profissao, endereco, rg, cpf;
-    
-    @NotNull
-    private double dinheiro;
-    
-    @OneToMany(mappedBy = "investidor")
-    private List<Acao> carteiraAcoes;
 
     public Investidor() {
-        this.carteiraAcoes = new ArrayList<>();//nao tenho certeza se está certo
     }
 
     public Investidor(String profissao, String endereco, String rg, String cpf, int id, String nome, String email, String login, String senha, ETipoUsuario tipo) {
@@ -46,22 +39,18 @@ public class Investidor extends Usuario{
         this.endereco = endereco;
         this.rg = rg;
         this.cpf = cpf;
-        this.carteiraAcoes = new ArrayList<>();//nao tenho certeza se está certo
-        
     }
-    
-    // CONSTRUTOR NOVO COM DINHEIRO
 
-    public Investidor(String profissao, String endereco, String rg, String cpf, double dinheiro, List<Acao> carteiraAcoes) {
+    public Investidor(int id, String nome, String email, String login, String senha, ETipoUsuario tipo) {
+        super(id, nome, email, login, senha, tipo);
+    }
+
+    public Investidor(String profissao, String endereco, String rg, String cpf) {
         this.profissao = profissao;
         this.endereco = endereco;
         this.rg = rg;
         this.cpf = cpf;
-        this.dinheiro = dinheiro;
-        this.carteiraAcoes = carteiraAcoes;
     }
-    
-    
 
     public String getProfissao() {
         return profissao;
@@ -95,22 +84,6 @@ public class Investidor extends Usuario{
         this.cpf = cpf;
     }
 
-    public List<Acao> getCarteiraAcoes() {
-        return carteiraAcoes;
-    }
-
-    public void setCarteiraAcoes(List<Acao> carteiraAcoes) {
-        this.carteiraAcoes = carteiraAcoes;
-    }
-    
-    public void carteiraAcoesAdd(Acao acao) {
-        this.carteiraAcoes.add(acao);
-    }
-    
-    public void carteiraAcoesRemove(Acao acao) {//criar um remove para remover pelo indicie tambem
-        this.carteiraAcoes.remove(acao);
-    }
-    
     public int getId() {
         return id;
     }
@@ -158,20 +131,6 @@ public class Investidor extends Usuario{
     public void setTipo(ETipoUsuario tipo) {
         this.tipo = tipo;
     }
-
-    public double getDinheiro() {
-        return dinheiro;
-    }
-
-    public void setDinheiro(double dinheiro) {
-        this.dinheiro = dinheiro;
-    }
-    
-    
-    
-    
-    
-    
     
     
 }

@@ -5,7 +5,6 @@
  */
 package br.vianna.aula.jsf.model.empresa;
 
-import br.vianna.aula.jsf.model.investidor.*;
 import br.vianna.aula.jsf.model.acao.Acao;
 import br.vianna.aula.jsf.model.usuario.*;
 import java.util.ArrayList;
