@@ -18,12 +18,6 @@ public class ListaEmpresaDTO {
     public ListaEmpresaDTO() {
     }
 
-    public ListaEmpresaDTO(int id, String nome, double valorAcoes) {
-        this.id = id;
-        this.nome = nome;
-        this.valorAcoes = valorAcoes;
-    }
-    
     public int getId() {
         return id;
     }

@@ -33,10 +33,9 @@ public class CadastroEmpresaMB implements Serializable {
     private ArrayList<ListaEmpresaDTO> listaEmpresa;
 
     private Empresa empresa;
-    
-    private String nome;
-    private double valorAcoes;
 
+
+  
 
     @Autowired
     private EmpresaDao empresaDao;
@@ -139,24 +138,6 @@ public class CadastroEmpresaMB implements Serializable {
     public void setEmpresaDao(EmpresaDao empresaDao) {
         this.empresaDao = empresaDao;
     }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getValorAcoes() {
-        return valorAcoes;
-    }
-
-    public void setValorAcoes(double valorAcoes) {
-        this.valorAcoes = valorAcoes;
-    }
-    
-    
     
     
 
