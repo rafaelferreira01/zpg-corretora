@@ -39,7 +39,7 @@ public class CadastroUsuarioMB {
     
     public String saveUser(){
         
-        user.setTipo(ETipoUsuario.NORMAL);
+        user.setTipo(ETipoUsuario.ADMIN);
         user.setSenha(user.getSenha());//chama o método que passa a senha pra MD5
         
         

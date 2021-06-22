@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    
+    
+    <ui:define name="title">
+        Cadastro de Empresas
+    </ui:define>
+
+    <ui:define name="body">
+        <h1>  Cadastro de Empresas. </h1>
+        
+        <h:messages style="color: red"   showDetail="true"/>  
+
+        <h:panelGroup rendered="#{cadEmpMB.estaNaView()}">
+            <p:panel header = "Pesquisar">
+
+                <h1> Pesquisa </h1>
+
+                <h:panelGrid columns="4" class="w-100">
+
+                    Nome do Empresa
+                    <h:inputText/>
+
+                    Ações
+                    <h:inputText/>
+
+
+
+                </h:panelGrid>
+                <h:form>
+                    <h:commandButton class="btn btn-primary" value="Pesquisar"/>
+
+                    <h:form>     
+                        <h:commandButton class="btn btn-secondary" value="Nova Empresa" action="#{cadEmpMB.trocar()}"/>
+                    </h:form>
+
+                </h:form>
+
+            </p:panel>
+
+
+            <p:dataTable var="empresa" value="#{cadEmpMB.lista}" rows="5"
+                         paginator="true" emptyMessage="Não há empresas cadastradas">
+
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{empresa.nome}" />
+                </p:column>
+
+                <p:column headerText="Ações">
+                    <h:outputText value="#{empresa.acoes}" />
+                </p:column>
+
+                <p:column headerText="Valor">
+                    <h:outputText value="#{empresa.valorAcoes}" />
+                </p:column>
+
+             
+                <p:column headerText="alterar">
+                    <h:form>
+                        <h:commandLink value="Alterar" action="#{cadEmpMB.prepareEdit(empresa.id)}"/>
+                    </h:form>
+                
+                </p:column>
+                
+                <p:column headerText="Excluir">
+                    <h:form>
+                        <h:commandLink value="Excluir" action="#{cadEmpMB.delete(empresa.id)}"/>
+                    </h:form>
+                
+                </p:column>
+
+
+
+
+
+            </p:dataTable>
+
+            <h:form>     
+                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadEmpMB.trocar()}"/>
+            </h:form>
+
+        </h:panelGroup>
+
+
+        <h:panelGroup rendered="#{cadPetMB.status == 'INSERT' || cadEmpMB.status == 'EDIT'}">
+
+            <h1> Nova Empresa </h1>
+            <h:form>
+                <h:panelGrid columns="2" class="w-100">
+                    Nome: 
+                    <h:inputText value="#{cadEmp.Nome}" required="true" requiredMessage="O nome não pode estar vazio!"/>
+
+                    Ações: 
+                    
+                        
+                    Valor das Ações: 
+                    <h:inputText value="#{cadEmp.ValorAcoes}" required="true" requiredMessage="O nome não pode estar vazio!"/>
+
+
+
+                </h:panelGrid>
+
+                <h:commandButton class="btn btn-primary" value="Salvar"  action="#{cadEmpMB.salvar()}"/>
+
+                <h:commandButton class="btn btn-primary" value="Voltar" action="#{cadEmpMB.voltar()}"/>
+            </h:form>
+        </h:panelGroup>
+
+
+    </ui:define>
+
+</ui:composition>

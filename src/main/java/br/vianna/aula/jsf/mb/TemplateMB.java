@@ -26,8 +26,12 @@ public class TemplateMB {
         return "index?faces-redirect=true";
     }
     
-    public String cadastrarPet(){
+   public String cadastrarPet(){
         return "cadastropet?faces-redirect=true";
+    }
+    
+    public String cadastrarEmpresa(){
+        return "cadastroEmpresas?faces-redirect=true";
     }
     
 }
