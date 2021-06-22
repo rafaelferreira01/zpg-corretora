@@ -34,6 +34,7 @@ public class CadastroInvestidorMB {
     
     private Investidor investidor;
     
+    
     @Autowired//injeção de dependencia - injetando usuario DAO
     UsuarioDao userD;
     
@@ -44,6 +45,9 @@ public class CadastroInvestidorMB {
     private ArrayList<ListaInvestidorDTO> listaInvestidor;
 
     private Empresa empresa;
+    
+    private String nome,profissao,endereco,cpf;
+    private double dinheiro;
 
 
   
@@ -145,6 +149,48 @@ public class CadastroInvestidorMB {
         this.empresaDao = empresaDao;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public double getDinheiro() {
+        return dinheiro;
+    }
+
+    public void setDinheiro(double dinheiro) {
+        this.dinheiro = dinheiro;
+    }
+    
+    
+
 
 
     public String salvar() {
@@ -181,10 +227,10 @@ public class CadastroInvestidorMB {
 
         FacesContext ct = FacesContext.getCurrentInstance();
 
-        Empresa aux = null;
+        Investidor aux = null;
 
       
-        ct.addMessage("", new FacesMessage(aux.getNome() + " excluído com sucesso!"));
+        ct.addMessage("", new FacesMessage(aux.getNome()+ " excluído com sucesso!"));
 
         listaInvestidor = getAllInvestidores() ; 
 
