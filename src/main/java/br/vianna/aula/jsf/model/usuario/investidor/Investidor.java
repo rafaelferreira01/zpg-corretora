@@ -29,6 +29,7 @@ public class Investidor extends Usuario{
     
     @NotNull
     private String profissao, endereco, rg, cpf;
+    private double dinheiro;
 
     public Investidor() {
     }
@@ -51,6 +52,16 @@ public class Investidor extends Usuario{
         this.rg = rg;
         this.cpf = cpf;
     }
+
+    public Investidor(String profissao, String endereco, String rg, String cpf, double dinheiro) {
+        this.profissao = profissao;
+        this.endereco = endereco;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.dinheiro = dinheiro;
+    }
+    
+    
 
     public String getProfissao() {
         return profissao;
@@ -131,6 +142,15 @@ public class Investidor extends Usuario{
     public void setTipo(ETipoUsuario tipo) {
         this.tipo = tipo;
     }
+
+    public double getDinheiro() {
+        return dinheiro;
+    }
+
+    public void setDinheiro(double dinheiro) {
+        this.dinheiro = dinheiro;
+    }
+    
     
     
 }

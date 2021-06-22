@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
  *
  * @author suporte
  */
-@Component(value = "cadInVMB")//colocando um alias nesse componente, agora sempre que quiser chamar o CadastroUsuarioMB podemos chamar cadMB
+@Component(value = "cadInvMB")//colocando um alias nesse componente, agora sempre que quiser chamar o CadastroUsuarioMB podemos chamar cadMB
 @RequestScoped
 public class CadastroInvestidorMB {
     
