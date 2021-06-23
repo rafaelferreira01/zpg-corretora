@@ -31,8 +31,7 @@ public class Empresa{
     @Id
     private int id;
     
-    @NotNull
-    private String nome;
+     private String nome;
     
     @NotNull
     private Double valorAcoes;

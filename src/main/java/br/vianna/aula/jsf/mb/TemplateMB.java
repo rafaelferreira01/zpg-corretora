@@ -30,4 +30,9 @@ public class TemplateMB {
         return "cadastroEmpresas?faces-redirect=true";
     }
     
+      public String cadastrarInvestidor(){
+        return "cadastroInvestidor?faces-redirect=true";
+    }
+    
+    
 }

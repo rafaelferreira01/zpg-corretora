@@ -28,13 +28,26 @@ import javax.validation.constraints.NotNull;
 public class Investidor extends Usuario{
     
     @NotNull
-    private String profissao, endereco, rg, cpf;
+    private String profissao;
+    
+    @NotNull
+    private String endereco;
+    
+    @NotNull
+    private String rg;
+    
+    @NotNull
+    private String cpf;
+    
+    @NotNull
+    private double dinheiro;
 
     public Investidor() {
+        this.tipo = ETipoUsuario.INVESTIDOR;
     }
 
-    public Investidor(String profissao, String endereco, String rg, String cpf, int id, String nome, String email, String login, String senha, ETipoUsuario tipo) {
-        super(id, nome, email, login, senha, tipo);
+    public Investidor(String profissao, String endereco, String rg, String cpf, int id, String nome, String email, String login, String senha) {
+        super(id, nome, email, login, senha, ETipoUsuario.INVESTIDOR);
         this.profissao = profissao;
         this.endereco = endereco;
         this.rg = rg;
@@ -42,7 +55,7 @@ public class Investidor extends Usuario{
     }
 
     public Investidor(int id, String nome, String email, String login, String senha, ETipoUsuario tipo) {
-        super(id, nome, email, login, senha, tipo);
+        super(id, nome, email, login, senha, ETipoUsuario.INVESTIDOR);
     }
 
     public Investidor(String profissao, String endereco, String rg, String cpf) {
@@ -50,7 +63,19 @@ public class Investidor extends Usuario{
         this.endereco = endereco;
         this.rg = rg;
         this.cpf = cpf;
+        this.tipo = ETipoUsuario.INVESTIDOR;
     }
+
+    public Investidor(String profissao, String endereco, String rg, String cpf, double dinheiro) {
+        this.profissao = profissao;
+        this.endereco = endereco;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.dinheiro = dinheiro;
+        this.tipo = ETipoUsuario.INVESTIDOR;
+    }
+    
+    
 
     public String getProfissao() {
         return profissao;
@@ -131,6 +156,15 @@ public class Investidor extends Usuario{
     public void setTipo(ETipoUsuario tipo) {
         this.tipo = tipo;
     }
+
+    public double getDinheiro() {
+        return dinheiro;
+    }
+
+    public void setDinheiro(double dinheiro) {
+        this.dinheiro = dinheiro;
+    }
+    
     
     
 }

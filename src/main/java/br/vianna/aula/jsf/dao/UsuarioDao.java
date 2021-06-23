@@ -25,67 +25,32 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class UsuarioDao {
     
-     private String src = "br.vianna.aula.jsf.model.dto.";
-
     @Autowired
     private EntityManager con;
-
+    
     @Transactional
-    public Usuario save(Usuario u) {
+    public Usuario save(Usuario u){
         con.persist(u);
         return u;
     }
-
-    @Transactional
-    public Investidor saveInvestidor(Investidor i) {
-        con.persist(i);
-        return i;
-    }
-
-    public UsuarioLogadoDTO verificaTabelaUsuario(String login, String senha) {
-        Query q = con.createQuery("select new br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO(u.id, u.nome, u.email, u.tipo) "
-                + "from Usuario u where u.login = :log and u.senha = :sen");
-
-        q.setParameter("log", login);
-        String conv = senha;
-        q.setParameter("sen", conv);
-
-        return (UsuarioLogadoDTO) q.getSingleResult();
-    }
-
-    public UsuarioLogadoDTO verificaTabelaInvestidor(String login, String senha) {
-        Query q = con.createQuery("select new br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO(i.id, i.nome, i.email, i.profissao, i.endereco, i.rg, i.cpf, i.tipo) "
-                + "from Investidor i where i.login = :log and i.senha = :sen");
-
-        q.setParameter("log", login);
-        String conv = senha;
-        q.setParameter("sen", conv);
-
-        return (UsuarioLogadoDTO) q.getSingleResult();
-    }
-
-    public UsuarioLogadoDTO existeUsuario(String login, String senha) {
+    
+    public UsuarioLogadoDTO existeUsuario(String login, String senha){
         try {
-            return verificaTabelaInvestidor(login, Utils.md5(senha));
+            Query q = con.createQuery("select new br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO(u.id, u.nome, u.email, u.tipo) "
+                    + "from Usuario u where u.login = :log and u.senha = :sen");
+
+            q.setParameter("log", login);
+            String conv = Utils.md5(senha);
+            q.setParameter("sen", conv);
+
+            return (UsuarioLogadoDTO) q.getSingleResult();
+            
         } catch (Exception e) {
-            try {
-                return verificaTabelaUsuario(login, Utils.md5(senha));
-            } catch (Exception e2) {
-                return null;
-            }
+            return null;
         }
-
+        
     }
-
-    // MÉTODO NOVO - CHECAR QUERY
-   
-    public ArrayList<ListaInvestidorDTO> getAllInvestidores() {
-
-        Query q = con.createQuery("SELECT new " + src + "ListInvestidorDTO(i.id,i.nome,i.profissao,i.endereco,i.cpf,i.dinheiro"
-                + " from Investidor i");
-
-        return (ArrayList<ListaInvestidorDTO>) q.getResultList();
-       }
-   }
+    
+}
 
 

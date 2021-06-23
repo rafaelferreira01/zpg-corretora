@@ -62,9 +62,9 @@
                     <ul class="nav nav-pills">
                         <h:panelGroup rendered="#{loginMB.admin}">
                             <li class="nav-item">
-                                <a class="nav-link"
-                                  href="#xxxx"> <i class="oi oi-cart"></i> <span>Investidores</span>
-                                </a>
+                                 <h:form>
+                                <h:commandLink class="nav-link" value="Investidores" action="#{templateMB.cadastrarInvestidor()}" />
+                            </h:form>
                             </li>
 
                             <li class="nav-item">

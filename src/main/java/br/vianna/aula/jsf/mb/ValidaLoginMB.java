@@ -5,6 +5,7 @@
  */
 package br.vianna.aula.jsf.mb;
 
+import br.vianna.aula.jsf.dao.InvestidorDao;
 import br.vianna.aula.jsf.dao.UsuarioDao;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import br.vianna.aula.jsf.model.usuario.Usuario;
@@ -28,6 +29,9 @@ public class ValidaLoginMB {//esse trecho de codigo só será criado quando a pa
     @Autowired
     UsuarioDao userD;
     
+    @Autowired
+    InvestidorDao investD;
+    
     @Autowired//injeção de dependenicia - essa notação faz com que seja utilizado o objeto loginMB que ja foi criado pelo controler ao invés de criar um loginMB novo
     private LoginMB loginMB;
 
@@ -38,10 +42,18 @@ public class ValidaLoginMB {//esse trecho de codigo só será criado quando a pa
             loginMB.setIsLogado(true);
             return "index"; //informando o nome da pagina a ser chamada caso a condição seja verdadeira
         }else{
+            loginMB.setUser(investD.existeInvestidor(loginMB.getNome(), loginMB.getSenha()));
+            
+            if (loginMB.getUser() != null){
+            loginMB.setIsLogado(true);
+            return "index"; //informando o nome da pagina a ser chamada caso a condição seja verdadeira
+        }else{
+            
             loginMB.setMsgErro("login ou senha inválida!");
             loginMB.setSenha("");//pra fazer nome e senha varzios antes de retornarem
             loginMB.setNome("");//pra fazer nome e senha varzios antes de retornarem
             return ""; //caso a condição seja falsa a pagina pagina que chamou esse MB será chamada novamente, isso foi definido ao retornar null ou ""
+            }
         }
     }
     

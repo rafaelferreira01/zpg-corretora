@@ -55,7 +55,7 @@
             </p:panel>
 
 
-            <p:dataTable var="investidor" value="#{cadInvMB.lista}" rows="5"
+            <p:dataTable var="investidor" value="#{cadInvMB.listaInvestidor}" rows="5"
                          paginator="true" emptyMessage="Não há investidores cadastrados">
 
 
@@ -119,26 +119,34 @@
             <h1> Nova Empresa </h1>
             <h:form>
                 <h:panelGrid columns="2" class="w-100">
+                    
+                    Login: 
+                    <h:inputText value="#{cadInvMB.investidor.login}" required="true" requiredMessage="O nome não pode estar vazio!"/>
+                    
+                    Email 
+                    <h:inputText value="#{cadInvMB.investidor.email}" required="true" requiredMessage="O nome não pode estar vazio!"/>
+                    
+                    Senha: 
+                    <h:inputText value="#{cadInvMB.investidor.senha}" required="true" requiredMessage="O nome não pode estar vazio!"/>
+                    
                     Nome: 
-                    <h:inputText value="#{cadInv.Nome}" required="true" requiredMessage="O nome não pode estar vazio!"/>
+                    <h:inputText value="#{cadInvMB.investidor.nome}" required="true" requiredMessage="O nome não pode estar vazio!"/>
 
                     Profissão
-                    <h:inputText value="#{cadInv.Profissao}" required="true" requiredMessage="A profissão não pode estar vazia!"/>
+                    <h:inputText value="#{cadInvMB.investidor.profissao}" required="true" requiredMessage="A profissão não pode estar vazia!"/>
                     
                     Endereço
-                    <h:inputText value="#{cadInv.Profissao}" required="true" requiredMessage="O endereço não pode estar vazia!"/>
+                    <h:inputText value="#{cadInvMB.investidor.endereco}" required="true" requiredMessage="O endereço não pode estar vazia!"/>
                     
-                    Endereço
-                    <h:inputText value="#{cadInv.CPF}" required="true" requiredMessage="O cpf não pode estar vazia!"/>
+                    CPF
+                    <h:inputText value="#{cadInvMB.investidor.cpf}" required="true" requiredMessage="O cpf não pode estar vazia!"/>
                     
+                    RG
+                    <h:inputText value="#{cadInvMB.investidor.rg}" required="true" requiredMessage="O cpf não pode estar vazia!"/>
                      
                     Investimento
-                    <h:inputText value="#{cadInv.dinheiro}" required="true" requiredMessage="O investimento não pode estar vazio e deve ser maior que 500 reais.!"/>
+                    <h:inputText value="#{cadInvMB.investidor.dinheiro}" required="true" requiredMessage="O investimento não pode estar vazio e deve ser maior que 500 reais.!"/>
                     
-                    
-                        
-              
-
                 </h:panelGrid>
 
                 <h:commandButton class="btn btn-primary" value="Salvar"  action="#{cadInvMB.salvar()}"/>

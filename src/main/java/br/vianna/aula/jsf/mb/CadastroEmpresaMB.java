@@ -33,13 +33,17 @@ public class CadastroEmpresaMB implements Serializable {
     private ArrayList<ListaEmpresaDTO> listaEmpresa;
 
     private Empresa empresa;
+    
+    private String nome;
+    
+    private double valorAcoes;
 
-
-  
 
     @Autowired
     private EmpresaDao empresaDao;
 
+//    @Autowired//injetando
+//    private EmpresaDao empDao; 
 
     public CadastroEmpresaMB() {
         status = EStatusCrud.VIEW;
@@ -138,6 +142,24 @@ public class CadastroEmpresaMB implements Serializable {
     public void setEmpresaDao(EmpresaDao empresaDao) {
         this.empresaDao = empresaDao;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getValorAcoes() {
+        return valorAcoes;
+    }
+
+    public void setValorAcoes(double valorAcoes) {
+        this.valorAcoes = valorAcoes;
+    }
+    
+    
     
     
 
@@ -147,6 +169,8 @@ public class CadastroEmpresaMB implements Serializable {
 
         FacesContext ct = FacesContext.getCurrentInstance();
    
+        empresaDao.save(empresa);
+        
         InicializaEmpresa();
         status = EStatusCrud.VIEW;
         listaEmpresa = getAllEmpresas();
@@ -169,7 +193,7 @@ public class CadastroEmpresaMB implements Serializable {
 
     public String prepareEdit(int id) {
         status = EStatusCrud.EDIT;
-        
+        empresa = empresaDao.get(id);
         return "";
     }
 
@@ -179,6 +203,7 @@ public class CadastroEmpresaMB implements Serializable {
 
         Empresa aux = null;
 
+        aux = empresaDao.delete(id);
       
         ct.addMessage("", new FacesMessage(aux.getNome() + " excluído com sucesso!"));
 
