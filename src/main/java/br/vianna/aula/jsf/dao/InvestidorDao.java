@@ -59,7 +59,7 @@ public class InvestidorDao {
     
     public ArrayList<ListaInvestidorDTO> getAllInvestidores() {
       
-          Query q = con.createQuery("SELECT new "+src+"ListaInvestidorDTO(i.id,i.nome,i.profissao,i.endereco,i.cpf)"
+          Query q = con.createQuery("SELECT new "+src+"ListaInvestidorDTO(i.id,i.nome,i.profissao,i.endereco,i.cpf,i.rg,i.email,i.login,i.conta.saldo)"
                     + " from Investidor i");
         
           

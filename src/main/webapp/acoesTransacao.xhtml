@@ -10,11 +10,11 @@
     
     
     <ui:define name="title">
-        Cadastro de Investidores
+        Venda e Compra de açoes
     </ui:define>
 
     <ui:define name="body">
-        <h1>  Cadastro de Investidor. </h1>
+        <h1>  Menu de Acoes. </h1>
         
         <h:messages style="color: red"   showDetail="true"/>  
 
@@ -59,16 +59,8 @@
                          paginator="true" emptyMessage="Não há investidores cadastrados">
 
 
-                <p:column headerText="Login">
-                    <h:outputText value="#{investidor.login}" />
-                </p:column>
-                
                 <p:column headerText="Nome">
                     <h:outputText value="#{investidor.nome}" />
-                </p:column>
-                
-                <p:column headerText="Email">
-                    <h:outputText value="#{investidor.email}" />
                 </p:column>
 
                 <p:column headerText="Profissão">
@@ -79,16 +71,14 @@
                     <h:outputText value="#{investidor.endereco}" />
                 </p:column>
                 
-                <p:column headerText="CPF">
+                
+                <p:column headerText="Identificação">
                     <h:outputText value="#{investidor.cpf}" />
                 </p:column>
                 
-                <p:column headerText="RG">
-                    <h:outputText value="#{investidor.rg}" />
-                </p:column>
                 
-                <p:column headerText="Saldo">
-                    <h:outputText value="#{investidor.saldo}" />  <!-- Saldo Inicial fica salvo no dinheiro, minimo de 500 de dinheiro pra começar  -->
+                <p:column headerText="Saldo Inicial">
+                    <h:outputText value="" />  <!-- Saldo Inicial fica salvo no dinheiro, minimo de 500 de dinheiro pra começar  -->
                 </p:column>
 
 

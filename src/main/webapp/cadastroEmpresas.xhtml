@@ -54,12 +54,16 @@
                     <h:outputText value="#{empresa.nome}" />
                 </p:column>
 
-<!--                <p:column headerText="Ações">
-                    <h:outputText value="#{empresa.acoes}" />
-                </p:column>-->
+                <p:column headerText="Total Ações">
+                    <h:outputText value="#{empresa.quantTotalAcoes}" />
+                </p:column>
+                
+                <p:column headerText="Ações Disponiveis">
+                    <h:outputText value="#" />
+                </p:column>
 
                 <p:column headerText="Valor">
-                    <h:outputText value="#{empresa.valorAcoes}" />
+                    <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
 
              
@@ -98,13 +102,11 @@
                     Nome: 
                     <h:inputText value="#{cadEmpMB.empresa.nome}" required="true" requiredMessage="O nome não pode estar vazio!"/>
 
-                    Ações: 
+                    Quantidade da Ações: 
+                    <h:inputText value="#{cadEmpMB.empresa.quantTotalAcoes}" required="true" requiredMessage="O campo de quantidade de ações não pode estar vazio!"/>
                     
-                        
                     Valor das Ações: 
-                    <h:inputText value="#{cadEmpMB.empresa.valorAcoes}" required="true" requiredMessage="O campo valor das ações não pode estar vazio!"/>
-
-
+                    <h:inputText value="#{cadEmpMB.empresa.valorAtualAcoes}" required="true" requiredMessage="O campo valor das ações não pode estar vazio!"/>
 
                 </h:panelGrid>
 

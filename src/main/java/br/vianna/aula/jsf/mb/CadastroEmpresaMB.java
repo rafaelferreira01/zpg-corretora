@@ -66,7 +66,7 @@ public class CadastroEmpresaMB implements Serializable {
         empresa = new Empresa();
         //    animal.setNome("abc");
       //  empresa.setListaAcoes();
-        empresa.setValorAcoes(100.00);
+//        empresa.setValorAtualAcoes(100.00);
         
     }
 

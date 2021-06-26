@@ -40,10 +40,9 @@ public class EmpresaDao {
 
     public ArrayList<ListaEmpresaDTO> getAllEmpresas() {
       
-          Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.valorAcoes)"
+          Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.quantTotalAcoes,e.valorAtualAcoes)"
                     + " from Empresa e");
-        
-          
+ 
         return (ArrayList<ListaEmpresaDTO>) q.getResultList();
     }
     

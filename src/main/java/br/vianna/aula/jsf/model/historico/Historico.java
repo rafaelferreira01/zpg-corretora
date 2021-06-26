@@ -5,6 +5,7 @@
  */
 package br.vianna.aula.jsf.model.historico;
 
+import br.vianna.aula.jsf.model.acao.ETipoTransacao;
 import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.empresa.Empresa;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;

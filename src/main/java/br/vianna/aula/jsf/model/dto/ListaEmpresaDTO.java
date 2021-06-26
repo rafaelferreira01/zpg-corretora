@@ -13,17 +13,27 @@ public class ListaEmpresaDTO {
     
     private int id;   
     private String nome;
-    private double valorAcoes;
+    private int quantTotalAcoes, quantAtualAcoes;
+    private double valorAtualAcoes;
 
     public ListaEmpresaDTO() {
     }
 
-    public ListaEmpresaDTO(int id, String nome, double valorAcoes) {
+    public ListaEmpresaDTO(int id, String nome, int quantTotalAcoes, double valorAtualAcoes) {
         this.id = id;
         this.nome = nome;
-        this.valorAcoes = valorAcoes;
+        this.quantTotalAcoes = quantTotalAcoes;
+        this.valorAtualAcoes = valorAtualAcoes;
     }
-    
+
+    public ListaEmpresaDTO(int id, String nome, int quantTotalAcoes, int quantAtualAcoes, double valorAtualAcoes) {
+        this.id = id;
+        this.nome = nome;
+        this.quantTotalAcoes = quantTotalAcoes;
+        this.quantAtualAcoes = quantAtualAcoes;
+        this.valorAtualAcoes = valorAtualAcoes;
+    }
+
     public int getId() {
         return id;
     }
@@ -40,15 +50,30 @@ public class ListaEmpresaDTO {
         this.nome = nome;
     }
 
-
-    public double getValorAcoes() {
-        return valorAcoes;
+    public int getQuantTotalAcoes() {
+        return quantTotalAcoes;
     }
 
-    public void setValorAcoes(double valorAcoes) {
-        this.valorAcoes = valorAcoes;
+    public void setQuantTotalAcoes(int quantTotalAcoes) {
+        this.quantTotalAcoes = quantTotalAcoes;
     }
 
- 
+    public int getQuantAtualAcoes() {
+        return quantAtualAcoes;
+    }
+
+    public void setQuantAtualAcoes(int quantAtualAcoes) {
+        this.quantAtualAcoes = quantAtualAcoes;
+    }
+
+    public double getValorAtualAcoes() {
+        return valorAtualAcoes;
+    }
+
+    public void setValorAtualAcoes(double valorAtualAcoes) {
+        this.valorAtualAcoes = valorAtualAcoes;
+    }
+
+    
     
 }

@@ -10,6 +10,8 @@ import br.vianna.aula.jsf.model.empresa.Empresa;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,9 +30,6 @@ public class Acao {
     @Id
     private int id;
     
-    @NotNull
-    private double valor;
-    
     @JoinColumn(name = "conta_id", referencedColumnName = "id")
     @ManyToOne(optional = true, cascade=CascadeType.ALL)
     private Conta conta;
@@ -38,6 +37,13 @@ public class Acao {
     @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade=CascadeType.ALL)
     private Empresa empresa;
+    
+    @NotNull
+    private double valor;
+    
+    @NotNull
+    @Enumerated(EnumType.STRING)//pra pegar a string do ENUM ao inves do indicie
+    private ETipoTransacao tipoTransacao;
 
     public Acao() {
     }

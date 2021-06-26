@@ -17,7 +17,8 @@ import javax.validation.constraints.NotNull;
 public class UsuarioLogadoDTO {
     
     private int id;
-    private String nome, email, profissao, endereco, rg, cpf;
+    private String nome, email, profissao, endereco, rg, cpf, login;
+    private double saldo;
     private ETipoUsuario tipo;
     
     public UsuarioLogadoDTO() {
@@ -41,6 +42,35 @@ public class UsuarioLogadoDTO {
         this.tipo = tipo;
     }
 
+    public UsuarioLogadoDTO(int id, String nome, String email, String profissao, String endereco, String rg, String cpf, String login, double saldo, ETipoUsuario tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.profissao = profissao;
+        this.endereco = endereco;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.login = login;
+        this.saldo = saldo;
+        this.tipo = tipo;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+    
     public int getId() {
         return id;
     }

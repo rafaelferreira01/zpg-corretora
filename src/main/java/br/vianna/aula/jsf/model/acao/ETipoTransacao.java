@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.vianna.aula.jsf.model.historico;
+package br.vianna.aula.jsf.model.acao;
 
 import br.vianna.aula.jsf.mb.*;
 

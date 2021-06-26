@@ -31,10 +31,14 @@ public class Empresa{
     @Id
     private int id;
     
-     private String nome;
+    @NotNull
+    private String nome;
+     
+    @NotNull
+    private int quantTotalAcoes;
     
     @NotNull
-    private Double valorAcoes;
+    private Double valorAtualAcoes;
     
     @OneToMany(mappedBy = "empresa")
     private List<Acao> listaAcoes;
@@ -43,11 +47,12 @@ public class Empresa{
         this.listaAcoes = new ArrayList<>();//nao tenho certeza se está certo
     }
 
-    public Empresa(int id, String nome, Double valorAcoes) {
+    public Empresa(int id, String nome, int quantTotalAcoes, Double valorAtualAcoes) {
         this.id = id;
         this.nome = nome;
-        this.valorAcoes = valorAcoes;
-        this.listaAcoes = new ArrayList<>();//nao tenho certeza se está certo
+        this.quantTotalAcoes = quantTotalAcoes;
+        this.valorAtualAcoes = valorAtualAcoes;
+        this.listaAcoes = new ArrayList<>();
     }
 
     public int getId() {
@@ -66,12 +71,20 @@ public class Empresa{
         this.nome = nome;
     }
 
-    public Double getValorAcoes() {
-        return valorAcoes;
+    public int getQuantTotalAcoes() {
+        return quantTotalAcoes;
     }
 
-    public void setValorAcoes(Double valorAcoes) {
-        this.valorAcoes = valorAcoes;
+    public void setQuantTotalAcoes(int quantTotalAcoes) {
+        this.quantTotalAcoes = quantTotalAcoes;
+    }
+
+    public Double getValorAtualAcoes() {
+        return valorAtualAcoes;
+    }
+
+    public void setValorAtualAcoes(Double valorAtualAcoes) {
+        this.valorAtualAcoes = valorAtualAcoes;
     }
 
     public List<Acao> getListaAcoes() {
@@ -82,11 +95,7 @@ public class Empresa{
         this.listaAcoes = listaAcoes;
     }
     
-    public void listaAcoesAdd(Acao acao) {
-        this.listaAcoes.add(acao);
-    }
     
-    public void listaAcoesRemove(Acao acao) {//criar um remove para remover pelo indicie tambem
-        this.listaAcoes.remove(acao);
-    }
+
+
 }
