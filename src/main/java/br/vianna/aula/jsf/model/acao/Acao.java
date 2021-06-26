@@ -8,6 +8,7 @@ package br.vianna.aula.jsf.model.acao;
 import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.empresa.Empresa;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,12 +31,12 @@ public class Acao {
     @NotNull
     private double valor;
     
-    @JoinColumn(name = "conta", referencedColumnName = "id")
-    @ManyToOne(optional = true)
+    @JoinColumn(name = "conta_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, cascade=CascadeType.ALL)
     private Conta conta;
     
-    @JoinColumn(name = "empresa", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, cascade=CascadeType.ALL)
     private Empresa empresa;
 
     public Acao() {

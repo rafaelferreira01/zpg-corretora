@@ -6,9 +6,12 @@
 package br.vianna.aula.jsf.model.usuario.investidor;
 
 import br.vianna.aula.jsf.model.acao.Acao;
+import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.usuario.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +19,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +30,7 @@ import javax.validation.constraints.NotNull;
  * @author suporte
  */
 @Entity
-public class Investidor extends Usuario{
+public class Investidor extends Usuario implements Serializable{
     
     @NotNull
     private String profissao;
@@ -38,44 +43,62 @@ public class Investidor extends Usuario{
     
     @NotNull
     private String cpf;
-    
-    @NotNull
-    private double dinheiro;
+      
+    @JoinColumn(name = "conta_id", referencedColumnName = "id")
+    @OneToOne(optional = true, cascade=CascadeType.ALL)
+    private Conta conta;
 
+    //construtor utilizado no inicializaInvestidor
     public Investidor() {
         this.tipo = ETipoUsuario.INVESTIDOR;
+        this.conta = new Conta();
     }
-
+    
+    
+    //construtor utilizado no startup
     public Investidor(String profissao, String endereco, String rg, String cpf, int id, String nome, String email, String login, String senha) {
         super(id, nome, email, login, senha, ETipoUsuario.INVESTIDOR);
         this.profissao = profissao;
         this.endereco = endereco;
         this.rg = rg;
         this.cpf = cpf;
+        this.conta = new Conta();
     }
+    
+    
+//    public Investidor(String profissao, String endereco, String rg, String cpf, int id, String nome, String email, String login, String senha, Conta conta) {
+//        super(id, nome, email, login, senha, ETipoUsuario.INVESTIDOR);
+//        this.profissao = profissao;
+//        this.endereco = endereco;
+//        this.rg = rg;
+//        this.cpf = cpf;
+//        this.conta = conta;
+//    }
 
+    //construtor utilizado na dao para listagem
     public Investidor(int id, String nome, String email, String login, String senha, ETipoUsuario tipo) {
         super(id, nome, email, login, senha, ETipoUsuario.INVESTIDOR);
+//        this.conta = new Conta();
     }
 
-    public Investidor(String profissao, String endereco, String rg, String cpf) {
-        this.profissao = profissao;
-        this.endereco = endereco;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.tipo = ETipoUsuario.INVESTIDOR;
-    }
+//    public Investidor(String profissao, String endereco, String rg, String cpf) {
+//        this.profissao = profissao;
+//        this.endereco = endereco;
+//        this.rg = rg;
+//        this.cpf = cpf;
+//        this.tipo = ETipoUsuario.INVESTIDOR;
+////        this.conta = new Conta();
+//    }
+//
+//    public Investidor(String profissao, String endereco, String rg, String cpf, double dinheiro) {
+//        this.profissao = profissao;
+//        this.endereco = endereco;
+//        this.rg = rg;
+//        this.cpf = cpf;
+//        this.tipo = ETipoUsuario.INVESTIDOR;
+////        this.conta = new Conta();
+//    }
 
-    public Investidor(String profissao, String endereco, String rg, String cpf, double dinheiro) {
-        this.profissao = profissao;
-        this.endereco = endereco;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.dinheiro = dinheiro;
-        this.tipo = ETipoUsuario.INVESTIDOR;
-    }
-    
-    
 
     public String getProfissao() {
         return profissao;
@@ -157,12 +180,12 @@ public class Investidor extends Usuario{
         this.tipo = tipo;
     }
 
-    public double getDinheiro() {
-        return dinheiro;
+    public Conta getConta() {
+        return conta;
     }
 
-    public void setDinheiro(double dinheiro) {
-        this.dinheiro = dinheiro;
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
     
     

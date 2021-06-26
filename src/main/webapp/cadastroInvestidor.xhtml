@@ -78,10 +78,7 @@
                 
                 
                 <p:column headerText="Saldo Inicial">
-                    <h:outputText value="#{investidor.dinheiro}" />  <!-- Saldo Inicial fica salvo no dinheiro, minimo de 500 de dinheiro pra começar  -->
-
-
-
+                    <h:outputText value="" />  <!-- Saldo Inicial fica salvo no dinheiro, minimo de 500 de dinheiro pra começar  -->
                 </p:column>
 
 
@@ -143,9 +140,11 @@
                     
                     RG
                     <h:inputText value="#{cadInvMB.investidor.rg}" required="true" requiredMessage="O cpf não pode estar vazia!"/>
-                     
-                    Investimento
-                    <h:inputText value="#{cadInvMB.investidor.dinheiro}" required="true" requiredMessage="O investimento não pode estar vazio e deve ser maior que 500 reais.!"/>
+                    
+                    <ui:fragment rendered="#{cadInvMB.status != 'EDIT'}">
+                        Investimento Inicial
+                        <h:inputText value="#{cadInvMB.investidor.conta.saldo}" required="true" requiredMessage="O investimento não pode estar vazio e deve ser maior que 500 reais.!"/>
+                    </ui:fragment>
                     
                 </h:panelGrid>
 

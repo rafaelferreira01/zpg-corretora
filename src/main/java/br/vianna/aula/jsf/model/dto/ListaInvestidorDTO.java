@@ -13,18 +13,16 @@ public class ListaInvestidorDTO {
     
     private int id;   
     private String nome,profissao,endereco,cpf;
-    private double dinheiro;
 
     public ListaInvestidorDTO() {
     }
 
-    public ListaInvestidorDTO(int id, String nome, String profissao, String endereco, String cpf, double dinheiro) {
+    public ListaInvestidorDTO(int id, String nome, String profissao, String endereco, String cpf) {
         this.id = id;
         this.nome = nome;
         this.profissao = profissao;
         this.endereco = endereco;
         this.cpf = cpf;
-        this.dinheiro = dinheiro;
     }
     
 
@@ -68,13 +66,7 @@ public class ListaInvestidorDTO {
         this.cpf = cpf;
     }
 
-    public double getDinheiro() {
-        return dinheiro;
-    }
 
-    public void setDinheiro(double dinheiro) {
-        this.dinheiro = dinheiro;
-    }
 
 
  

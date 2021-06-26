@@ -2,6 +2,7 @@ package br.vianna.aula.jsf;
 
 import br.vianna.aula.jsf.dao.InvestidorDao;
 import br.vianna.aula.jsf.dao.UsuarioDao;
+import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import br.vianna.aula.jsf.model.usuario.Usuario;
@@ -33,10 +34,11 @@ public class ProjectJsfSpringApplication implements CommandLineRunner{
         userD.save(u);
         
         
-        
+//        Conta c = new Conta();//cria a conta
         Investidor i = new Investidor("vagabundo", "rua das couves", "1212121212", "77777777",
-                0, "PedrinIvstidor", "pedrin@pedr", "ped", Utils.md5("123"));
-        InvestD.save(i);
+                0, "PedrinIvstidor", "pedrin@pedr", "ped", Utils.md5("123"));///cria o investidor passando a conta
+//        c.setInvestidor(i);//passa o investidor pra dentro da conta
+        InvestD.save(i);//salva o investidor
     
     }
 

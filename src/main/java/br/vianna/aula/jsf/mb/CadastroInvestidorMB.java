@@ -8,6 +8,7 @@ package br.vianna.aula.jsf.mb;
 import br.vianna.aula.jsf.dao.EmpresaDao;
 import br.vianna.aula.jsf.dao.InvestidorDao;
 import br.vianna.aula.jsf.dao.UsuarioDao;
+import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.dto.ListaInvestidorDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
@@ -37,7 +38,6 @@ public class CadastroInvestidorMB  implements Serializable{
     
     private Investidor investidor;
     
-    
 //    @Autowired//injeção de dependencia - injetando usuario DAO
 //    UsuarioDao userD;//acho que pode apagr isso
     
@@ -49,7 +49,6 @@ public class CadastroInvestidorMB  implements Serializable{
 
     
     private String nome,profissao,endereco,cpf;
-    private double dinheiro;
 
 
   
@@ -78,7 +77,7 @@ public class CadastroInvestidorMB  implements Serializable{
         
     }
 
-    public CadastroInvestidorMB(Investidor investidor, EStatusCrud status, ArrayList<ListaInvestidorDTO> listaInvestidor, String nome, String profissao, String endereco, String cpf, double dinheiro, InvestidorDao investidorDao) {
+    public CadastroInvestidorMB(Investidor investidor, EStatusCrud status, ArrayList<ListaInvestidorDTO> listaInvestidor, String nome, String profissao, String endereco, String cpf, InvestidorDao investidorDao) {
         this.investidor = investidor;
         this.status = status;
         this.listaInvestidor = listaInvestidor;
@@ -86,7 +85,6 @@ public class CadastroInvestidorMB  implements Serializable{
         this.profissao = profissao;
         this.endereco = endereco;
         this.cpf = cpf;
-        this.dinheiro = dinheiro;
         this.investidorDao = investidorDao;
     }
 
@@ -196,13 +194,6 @@ public class CadastroInvestidorMB  implements Serializable{
         this.cpf = cpf;
     }
 
-    public double getDinheiro() {
-        return dinheiro;
-    }
-
-    public void setDinheiro(double dinheiro) {
-        this.dinheiro = dinheiro;
-    }
     
     
 

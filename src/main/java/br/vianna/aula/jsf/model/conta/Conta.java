@@ -8,13 +8,17 @@ package br.vianna.aula.jsf.model.conta;
 import br.vianna.aula.jsf.model.acao.Acao;
 import br.vianna.aula.jsf.model.empresa.Empresa;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -23,25 +27,36 @@ import javax.validation.constraints.NotNull;
  * @author Leonardo
  */
 @Entity
-public class Conta {
+public class Conta implements Serializable{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Id
     private int id;
     
     @NotNull
     private double saldo;
+    
+    @JoinColumn(name = "acao_id", referencedColumnName = "id")
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Acao> listaAcoes;
        
-    @JoinColumn(name = "investidor", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Investidor investidor;
+//    @JoinColumn(name = "investidor_id", referencedColumnName = "id")
+//    @OneToOne(optional = true, cascade=CascadeType.ALL)
+//    private Investidor investidor;
 
     public Conta() {
     }
+    
+    //construtor sendo utilizado na classe Investidor
+    public Conta(Investidor investidor) {
+//        this.investidor = investidor;
+        listaAcoes = new ArrayList<>();
+    }
 
-    public Conta(int id, double saldo, Investidor investidor) {
+    public Conta(int id, double saldo) {
         this.id = id;
         this.saldo = saldo;
-        this.investidor = investidor;
+        listaAcoes = new ArrayList<>();
+//        this.investidor = investidor;
     }
 
     public int getId() {
@@ -59,13 +74,23 @@ public class Conta {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+    
+    
 
-    public Investidor getInvestidor() {
-        return investidor;
+//    public Investidor getInvestidor() {
+//        return investidor;
+//    }
+//
+//    public void setInvestidor(Investidor investidor) {
+//        this.investidor = investidor;
+//    }
+
+    public List<Acao> getListaAcoes() {
+        return listaAcoes;
     }
 
-    public void setInvestidor(Investidor investidor) {
-        this.investidor = investidor;
+    public void setListaAcoes(List<Acao> listaAcoes) {
+        this.listaAcoes = listaAcoes;
     }
     
     
