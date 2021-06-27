@@ -32,8 +32,16 @@ public class UsuarioLogadoDTO {
         this.email = email;
         this.tipo = tipo;
     }
+    
+    public UsuarioLogadoDTO(int id, String nome, String email, ETipoUsuario tipo, Conta conta) {//construtor usuario administrador
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.tipo = tipo;
+        this.conta = conta;
+    }
 
-    public UsuarioLogadoDTO(int id, String nome, String email, String profissao, String endereco, String rg, String cpf, ETipoUsuario tipo) {//construtor do usuario investidor
+    public UsuarioLogadoDTO(int id, String nome, String email, String profissao, String endereco, String rg, String cpf, ETipoUsuario tipo, Conta conta) {//construtor do usuario investidor
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -42,20 +50,22 @@ public class UsuarioLogadoDTO {
         this.rg = rg;//atributo do investidor apenas (para referencia)
         this.cpf = cpf;//atributo do investidor apenas (para referencia)
         this.tipo = tipo;
+        this.conta = conta;
     }
 
-    public UsuarioLogadoDTO(int id, String nome, String email, String profissao, String endereco, String rg, String cpf, String login, double saldo, ETipoUsuario tipo) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.profissao = profissao;
-        this.endereco = endereco;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.login = login;
-        this.saldo = saldo;
-        this.tipo = tipo;
-    }
+//    public UsuarioLogadoDTO(int id, String nome, String email, String profissao, String endereco, String rg, String cpf, String login, double saldo, ETipoUsuario tipo) {
+//        this.id = id;
+//        this.nome = nome;
+//        this.email = email;
+//        this.profissao = profissao;
+//        this.endereco = endereco;
+//        this.rg = rg;
+//        this.cpf = cpf;
+//        this.login = login;
+//        this.saldo = saldo;
+//        this.tipo = tipo;
+//    }
+    
 
     public Conta getConta() {
         return conta;

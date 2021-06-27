@@ -66,6 +66,7 @@ public class Investidor extends Usuario implements Serializable{
     }
     
     
+    
 //    public Investidor(String profissao, String endereco, String rg, String cpf, int id, String nome, String email, String login, String senha, Conta conta) {
 //        super(id, nome, email, login, senha, ETipoUsuario.INVESTIDOR);
 //        this.profissao = profissao;

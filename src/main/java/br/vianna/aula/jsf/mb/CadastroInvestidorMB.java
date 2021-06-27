@@ -15,8 +15,10 @@ import br.vianna.aula.jsf.model.empresa.Empresa;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import br.vianna.aula.jsf.model.usuario.Usuario;
+import br.vianna.aula.jsf.utils.Utils;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -199,9 +201,11 @@ public class CadastroInvestidorMB  implements Serializable{
 
 
 
-    public String salvar() {
+    public String salvar() throws NoSuchAlgorithmException {
         
         FacesContext ct = FacesContext.getCurrentInstance();
+        
+        investidor.setSenha(Utils.md5(investidor.getSenha()));
    
         investidorDao.save(investidor);
         

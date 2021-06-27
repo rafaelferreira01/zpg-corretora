@@ -8,6 +8,7 @@ package br.vianna.aula.jsf.mb;
 import br.vianna.aula.jsf.dao.AcaoDao;
 import br.vianna.aula.jsf.dao.EmpresaDao;
 import br.vianna.aula.jsf.model.acao.Acao;
+import br.vianna.aula.jsf.model.acao.ETipoTransacao;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
@@ -39,6 +40,7 @@ public class AcaoMB implements Serializable {
 //
     private Empresa empresa;
 //    
+    private int quantidadeAcao;
 //    private String nome;
 //    
 //    private double valorAcoes;
@@ -75,7 +77,6 @@ public class AcaoMB implements Serializable {
     }
 //
     private void InicializaAcao() {
-        System.out.println("sdaaaaaaaaaaaaaaaaaaaa");
         acao = new Acao();
         //    animal.setNome("abc");
       //  empresa.setListaAcoes();
@@ -104,19 +105,29 @@ public class AcaoMB implements Serializable {
 //    }
 //}
 
-    public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, Acao acao, AcaoDao acaoDao, EmpresaDao empresaDao) {
+//    public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, Acao acao, AcaoDao acaoDao, EmpresaDao empresaDao) {
+//        this.status = status;
+//        this.user = user;
+//        this.empresa = empresa;
+//        this.acao = acao;
+//        this.acaoDao = acaoDao;
+//        this.empresaDao = empresaDao;
+//        
+//    }
+    
+    
+    
+    public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, int quantidadeAcao, Acao acao, AcaoDao acaoDao, LoginMB usuario, EmpresaDao empresaDao) {
         this.status = status;
         this.user = user;
         this.empresa = empresa;
+        this.quantidadeAcao = quantidadeAcao;
         this.acao = acao;
         this.acaoDao = acaoDao;
+        this.usuario = usuario;
         this.empresaDao = empresaDao;
-        
-        System.out.println("sdsdsd");
     }
-    
-    
-    
+
     public void setStatus(EStatusCrud status) {
         this.status = status;
     }
@@ -137,6 +148,23 @@ public class AcaoMB implements Serializable {
         return status == EStatusCrud.VIEW;
     }
 
+    public int getQuantidadeAcao() {
+        return quantidadeAcao;
+    }
+
+    public void setQuantidadeAcao(int quantidadeAcao) {
+        this.quantidadeAcao = quantidadeAcao;
+    }
+
+    public LoginMB getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(LoginMB usuario) {
+        this.usuario = usuario;
+    }
+
+    
 //    public ArrayList<ListaEmpresaDTO> getLista() {
 //        return listaEmpresa;
 //    }
@@ -214,24 +242,29 @@ public class AcaoMB implements Serializable {
     
     
     ///////////////////////////////////////////
-    public String comprar(int id, int quant) {
-        empresa = empresaDao.get(id);
-        System.out.println(empresa+"EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-        acao.setEmpresa(empresa);
-        acao.setConta(usuario.getUser().getConta());
-        System.out.println(usuario+"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+    public String comprar(int id) {
+//        empresa = empresaDao.get(id);
+//        System.out.println(empresa.getNome()+"EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+//        acao.setEmpresa(empresa);
+        
+        
+//        acao.setConta(usuario.getUser().getConta());
+//        System.out.println(usuario.getUser().getNome()+"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
         
         
 
         FacesContext ct = FacesContext.getCurrentInstance();
         
+        System.out.println(usuario.getUser().getConta()+"   \nAAAAAAAAAAAAAAAAAAAAAA");
    
 //        acao = acaoDao.get(id);
         empresa = empresaDao.get(id);
         acao.setEmpresa(empresa);
-        acao.setConta(user.getConta());
-        
-        
+        acao.setTipoTransacao(ETipoTransacao.COMPRA);
+        acao.setValorTransacao(empresa.getValorAtualAcoes()*this.quantidadeAcao);
+        acao.setQuantidadeAcoesTransacao(this.quantidadeAcao);
+        acao.setDataTransacao(new Date());
+        acao.setConta(usuario.getUser().getConta());
         
         
         acaoDao.save(acao);

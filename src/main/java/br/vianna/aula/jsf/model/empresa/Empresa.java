@@ -9,6 +9,7 @@ import br.vianna.aula.jsf.model.acao.Acao;
 import br.vianna.aula.jsf.model.usuario.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -40,7 +41,7 @@ public class Empresa{
     @NotNull
     private Double valorAtualAcoes;
     
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy="empresa")
     private List<Acao> listaAcoes;
 
     public Empresa() {

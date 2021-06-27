@@ -35,8 +35,8 @@ public class Conta implements Serializable{
     @NotNull
     private double saldo;
     
-    @JoinColumn(name = "acao_id", referencedColumnName = "id")
-    @OneToMany(cascade=CascadeType.ALL)
+//    @JoinColumn(name = "acao_id", referencedColumnName = "id")
+    @OneToMany(mappedBy="conta")
     private List<Acao> listaAcoes;
        
 //    @JoinColumn(name = "investidor_id", referencedColumnName = "id")

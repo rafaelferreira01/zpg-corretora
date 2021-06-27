@@ -73,12 +73,11 @@
              
                 <p:column headerText="Vender">
                     <h:form>
-                        <h:inputText binding="#{quants}" />
+                        <h:inputText value="#{acaoMB.quantidadeAcao}" />
                         <!--<f:validateLongRange minimum="20" maximum="1000" />-->
                         
-                        <h:commandLink value="AAAAAA" action="#{acaoMB.comprar(empresa.id, quant.value)}" />
+                        <h:commandLink value="AAAAAA" action="#{acaoMB.comprar(empresa.id)}" />
                     </h:form>
-                
                 </p:column>
 
             </p:dataTable>

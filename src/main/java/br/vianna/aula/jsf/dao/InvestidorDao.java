@@ -42,7 +42,7 @@ public class InvestidorDao {
     
     public UsuarioLogadoDTO existeInvestidor(String login, String senha){//para logar
         try {
-            Query q = con.createQuery("select new "+src+"UsuarioLogadoDTO(i.id, i.nome, i.email, i.profissao, i.endereco, i.rg, i.cpf, i.tipo) "
+            Query q = con.createQuery("select new "+src+"UsuarioLogadoDTO(i.id, i.nome, i.email, i.profissao, i.endereco, i.rg, i.cpf, i.tipo, i.conta) "
                 + "from Investidor i where i.login = :log and i.senha = :sen");
 
             q.setParameter("log", login);

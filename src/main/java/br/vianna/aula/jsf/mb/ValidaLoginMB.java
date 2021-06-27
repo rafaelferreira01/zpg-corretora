@@ -36,13 +36,14 @@ public class ValidaLoginMB {//esse trecho de codigo só será criado quando a pa
     private LoginMB loginMB;
 
     public String VerificaPassword(){
-        loginMB.setUser(userD.existeUsuario(loginMB.getNome(), loginMB.getSenha()));
+        loginMB.setUser(investD.existeInvestidor(loginMB.getNome(), loginMB.getSenha()));
+        
         
         if (loginMB.getUser() != null){
             loginMB.setIsLogado(true);
             return "index"; //informando o nome da pagina a ser chamada caso a condição seja verdadeira
         }else{
-            loginMB.setUser(investD.existeInvestidor(loginMB.getNome(), loginMB.getSenha()));
+            loginMB.setUser(userD.existeUsuario(loginMB.getNome(), loginMB.getSenha()));
             
             if (loginMB.getUser() != null){
             loginMB.setIsLogado(true);

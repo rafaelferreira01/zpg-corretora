@@ -8,7 +8,9 @@ package br.vianna.aula.jsf.mb;
 import br.vianna.aula.jsf.dao.UsuarioDao;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import br.vianna.aula.jsf.model.usuario.Usuario;
+import br.vianna.aula.jsf.utils.Utils;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -37,10 +39,10 @@ public class CadastroUsuarioMB {
         user = new Usuario();
     }
     
-    public String saveUser(){
+    public String saveUser() throws NoSuchAlgorithmException{
         
         user.setTipo(ETipoUsuario.ADMIN);
-        user.setSenha(user.getSenha());//chama o método que passa a senha pra MD5
+        user.setSenha(Utils.md5(user.getSenha()));//chama o método que passa a senha pra MD5
         
         
         userD.save(user);//salva o usuario
