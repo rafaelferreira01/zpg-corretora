@@ -48,7 +48,8 @@ public class AcaoMB implements Serializable {
     @Autowired
     private AcaoDao acaoDao;
     
-    
+    @Autowired
+    private LoginMB usuario;
     
     @Autowired
     private EmpresaDao empresaDao;
@@ -214,8 +215,11 @@ public class AcaoMB implements Serializable {
     
     ///////////////////////////////////////////
     public String comprar(int id, int quant) {
-        System.out.println("asdadadasdasd");
-        System.out.println("asdadadasdasd");
+        empresa = empresaDao.get(id);
+        System.out.println(empresa+"EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+        acao.setEmpresa(empresa);
+        acao.setConta(usuario.getUser().getConta());
+        System.out.println(usuario+"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
         
         
 

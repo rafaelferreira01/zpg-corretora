@@ -73,10 +73,10 @@
              
                 <p:column headerText="Vender">
                     <h:form>
-                        <h:inputText binding="#{quant}">
-                            <!--<f:validateLongRange minimum="20" maximum="1000" />-->
-                        </h:inputText>
-                        <h:commandLink value="#" action="#{acaoMB.vender(quant.value)}"/>
+                        <h:inputText binding="#{quants}" />
+                        <!--<f:validateLongRange minimum="20" maximum="1000" />-->
+                        
+                        <h:commandLink value="AAAAAA" action="#{acaoMB.comprar(empresa.id, quant.value)}" />
                     </h:form>
                 
                 </p:column>
