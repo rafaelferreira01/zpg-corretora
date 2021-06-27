@@ -19,6 +19,7 @@ public class ListaEmpresaDTO {
     public ListaEmpresaDTO() {
     }
 
+    //esta usando esse eu acho
     public ListaEmpresaDTO(int id, String nome, int quantTotalAcoes, double valorAtualAcoes) {
         this.id = id;
         this.nome = nome;

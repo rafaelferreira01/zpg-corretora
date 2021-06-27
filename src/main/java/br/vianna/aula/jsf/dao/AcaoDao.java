@@ -5,6 +5,7 @@
  */
 package br.vianna.aula.jsf.dao;
 
+import br.vianna.aula.jsf.model.acao.Acao;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Leonardo
  */
 @Component
-public class EmpresaDao {
+public class AcaoDao {
     
     private String src = "br.vianna.aula.jsf.model.dto.";
     
@@ -28,13 +29,23 @@ public class EmpresaDao {
     
     
     @Transactional
-    public Empresa save(Empresa e){
-        if (e.getId() > 0){//se o id for maior que 0 significa que é um registro que ja existe, isso té, estão dando um update no registro
-            conexao.merge(e);//atualizando uma edicao (update)
+    public Acao save(Acao a){
+        if (a.getId() > 0){//se o id for maior que 0 significa que é um registro que ja existe, isso té, estão dando um update no registro
+            conexao.merge(a);//atualizando uma edicao (update)
         }else{//caso contrario eh um novo registro
-            conexao.persist(e);//inserindo...
+            conexao.persist(a);//inserindo...
         }
-        return e;
+        return a;
+    }
+    
+    @Transactional
+    public Acao comprar(Acao a){
+        if (a.getId() > 0){//se o id for maior que 0 significa que é um registro que ja existe, isso té, estão dando um update no registro
+            conexao.merge(a);//atualizando uma edicao (update)
+        }else{//caso contrario eh um novo registro
+            conexao.persist(a);//inserindo...
+        }
+        return a;
     }
     
 
@@ -46,22 +57,16 @@ public class EmpresaDao {
         return (ArrayList<ListaEmpresaDTO>) q.getResultList();
     }
     
-    public Empresa get(int id) {
-        return conexao.find(Empresa.class, id);
+    public Acao get(int id) {
+        return conexao.find(Acao.class, id);
     }
 
     @Transactional
-    public Empresa delete(int id) {
-        Empresa e = get(id);//pega o cachorro e salva ele na variavel g
-        conexao.remove(e);//apaga ele do banco de dados
-        return e;//retorna ele
+    public Acao delete(int id) {
+        Acao a = get(id);//pega o cachorro e salva ele na variavel g
+        conexao.remove(a);//apaga ele do banco de dados
+        return a;//retorna ele
     }
     
 }
-
-
-
-//Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.quantTotalAcoes,e.valorAtualAcoes,e.listaAcoes.size())"
-//                    + " from Empresa e "
-//                    + " where e.e.listaAcoes.size() < e.quantTotalAcoes");
 

@@ -5,6 +5,7 @@
  */
 package br.vianna.aula.jsf.model.dto;
 
+import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +21,7 @@ public class UsuarioLogadoDTO {
     private String nome, email, profissao, endereco, rg, cpf, login;
     private double saldo;
     private ETipoUsuario tipo;
+    private Conta conta;
     
     public UsuarioLogadoDTO() {
     }
@@ -55,6 +57,14 @@ public class UsuarioLogadoDTO {
         this.tipo = tipo;
     }
 
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
+    
     public String getLogin() {
         return login;
     }

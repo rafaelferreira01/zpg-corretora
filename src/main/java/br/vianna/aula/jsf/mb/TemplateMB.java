@@ -33,6 +33,10 @@ public class TemplateMB {
       public String cadastrarInvestidor(){
         return "cadastroInvestidor?faces-redirect=true";
     }
+      
+    public String acoesTransacao(){
+    return "acoesTransacao?faces-redirect=true";
+    }
     
     
 }

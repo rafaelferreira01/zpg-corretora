@@ -10,7 +10,7 @@
     
     
     <ui:define name="title">
-        Venda e Compra de açoes
+        Venda e Compra de Ações
     </ui:define>
 
     <ui:define name="body">
@@ -18,7 +18,7 @@
         
         <h:messages style="color: red"   showDetail="true"/>  
 
-        <h:panelGroup rendered="#{cadInvMB.estaNaView()}">
+        <h:panelGroup rendered="#{cadEmpMB.estaNaView()}">
             <p:panel header = "Pesquisar">
 
                 <h1> Pesquisa </h1>
@@ -47,7 +47,7 @@
                     <h:commandButton class="btn btn-primary" value="Pesquisar"/>
 
                     <h:form>     
-                        <h:commandButton class="btn btn-secondary" value="Novo Investidor" action="#{cadInvMB.trocar()}"/>
+                        <h:commandButton class="btn btn-secondary" value="Novo Investidor" action="#{cadEmpMB.trocar()}"/>
                     </h:form>
 
                 </h:form>
@@ -55,102 +55,75 @@
             </p:panel>
 
 
-            <p:dataTable var="investidor" value="#{cadInvMB.listaInvestidor}" rows="5"
-                         paginator="true" emptyMessage="Não há investidores cadastrados">
+            <p:dataTable var="empresa" value="#{cadEmpMB.lista}" rows="5"
+                         paginator="true" emptyMessage="Não há empresas cadastradas">
 
-
-                <p:column headerText="Nome">
-                    <h:outputText value="#{investidor.nome}" />
-                </p:column>
-
-                <p:column headerText="Profissão">
-                    <h:outputText value="#{investidor.profissao}" />
-                </p:column>
-
-                <p:column headerText="Endereço">
-                    <h:outputText value="#{investidor.endereco}" />
+                <p:column headerText="Empresa">
+                    <h:outputText value="#{empresa.nome}" />
                 </p:column>
                 
-                
-                <p:column headerText="Identificação">
-                    <h:outputText value="#{investidor.cpf}" />
-                </p:column>
-                
-                
-                <p:column headerText="Saldo Inicial">
-                    <h:outputText value="" />  <!-- Saldo Inicial fica salvo no dinheiro, minimo de 500 de dinheiro pra começar  -->
+                <p:column headerText="Ações Disponiveis">
+                    <h:outputText value="#" />
                 </p:column>
 
-
-
+                <p:column headerText="Val Atual das Ações">
+                    <h:outputText value="#{empresa.valorAtualAcoes}" />
+                </p:column>
+                
              
-                <p:column headerText="alterar">
+                <p:column headerText="Vender">
                     <h:form>
-                        <h:commandLink value="Alterar" action="#{cadInvMB.prepareEdit(investidor.id)}"/>
+                        <h:inputText binding="#{quant}">
+                            <!--<f:validateLongRange minimum="20" maximum="1000" />-->
+                        </h:inputText>
+                        <h:commandLink value="#" action="#{acaoMB.vender(quant.value)}"/>
                     </h:form>
                 
                 </p:column>
-                
-                <p:column headerText="Excluir">
-                    <h:form>
-                        <h:commandLink value="Excluir" action="#{cadInvMB.delete(investidor.id)}"/>
-                    </h:form>
-                
-                </p:column>
-
-
-
-
 
             </p:dataTable>
 
             <h:form>     
-                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadInvMB.trocar()}"/>
+                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadEmpMB.trocar()}"/>
             </h:form>
 
         </h:panelGroup>
 
 
-        <h:panelGroup rendered="#{cadInvMB.status == 'INSERT' || cadInvMB.status == 'EDIT'}">
+        <h:panelGroup rendered="#{cadEmpMB.status == 'INSERT' }">
 
             <h1> Nova Empresa </h1>
             <h:form>
-                <h:panelGrid columns="2" class="w-100">
-                    
-                    Login: 
-                    <h:inputText value="#{cadInvMB.investidor.login}" required="true" requiredMessage="O nome não pode estar vazio!"/>
-                    
-                    Email 
-                    <h:inputText value="#{cadInvMB.investidor.email}" required="true" requiredMessage="O nome não pode estar vazio!"/>
-                    
-                    Senha: 
-                    <h:inputText value="#{cadInvMB.investidor.senha}" required="true" requiredMessage="O nome não pode estar vazio!"/>
-                    
-                    Nome: 
-                    <h:inputText value="#{cadInvMB.investidor.nome}" required="true" requiredMessage="O nome não pode estar vazio!"/>
+       <p:dataTable var="empresa" value="#{cadEmpMB.lista}" rows="5"
+                         paginator="true" emptyMessage="Não há empresas cadastradas">
 
-                    Profissão
-                    <h:inputText value="#{cadInvMB.investidor.profissao}" required="true" requiredMessage="A profissão não pode estar vazia!"/>
-                    
-                    Endereço
-                    <h:inputText value="#{cadInvMB.investidor.endereco}" required="true" requiredMessage="O endereço não pode estar vazia!"/>
-                    
-                    CPF
-                    <h:inputText value="#{cadInvMB.investidor.cpf}" required="true" requiredMessage="O cpf não pode estar vazia!"/>
-                    
-                    RG
-                    <h:inputText value="#{cadInvMB.investidor.rg}" required="true" requiredMessage="O cpf não pode estar vazia!"/>
-                    
-                    <ui:fragment rendered="#{cadInvMB.status != 'EDIT'}">
-                        Investimento Inicial
-                        <h:inputText value="#{cadInvMB.investidor.conta.saldo}" required="true" requiredMessage="O investimento não pode estar vazio e deve ser maior que 500 reais.!"/>
-                    </ui:fragment>
-                    
-                </h:panelGrid>
+                <p:column headerText="Empresa">
+                    <h:outputText value="#{empresa.nome}" />
+                </p:column>
+                
+                <p:column headerText="Quantidade Disponivel de Ações">
+                    <h:outputText value="#" />
+                </p:column>
 
-                <h:commandButton class="btn btn-primary" value="Salvar"  action="#{cadInvMB.salvar()}"/>
+                <p:column headerText="Val Atual das Ações">
+                    <h:outputText value="#{empresa.valorAtualAcoes}" />
+                </p:column>
+                
+             
+                <p:column headerText="Vender">
+                    <h:form>
+                        <h:inputText binding="#{quant}" />
+                        <!--<f:validateLongRange minimum="20" maximum="1000" />-->
+                        
+                        <h:commandLink value="Comprar" action="#{acaoMB.comprar(empresa.id, quant.value)}" />
+                    </h:form>
+                    
+                    <h:form>     
+                        <h:commandButton class="btn btn-secondary" value="aaaaa" action="#{acaoMB.comprar(empresa.id, quant.value)}"/>
+                    </h:form>
+                </p:column>
 
-                <h:commandButton class="btn btn-primary" value="Voltar" action="#{cadInvMB.voltar()}"/>
+            </p:dataTable>
             </h:form>
         </h:panelGroup>
 

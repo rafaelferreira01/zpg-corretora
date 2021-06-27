@@ -82,9 +82,9 @@
 
                         <h:panelGroup rendered="#{loginMB.investidor}">
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   href="#xxxx"> <i class="oi oi-cart"></i> <span>Ações</span>
-                                </a>
+                                <h:form>
+                                    <h:commandLink class="nav-link" value="Ações" action="#{templateMB.acoesTransacao()}"/> 
+                                </h:form>
                             </li>
 
                             <li class="nav-item">

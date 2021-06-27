@@ -36,7 +36,7 @@ public class CadastroEmpresaMB implements Serializable {
     
     private String nome;
     
-    private double valorAcoes;
+//    private double valorAcoes;
 
 
     @Autowired
@@ -151,13 +151,13 @@ public class CadastroEmpresaMB implements Serializable {
         this.nome = nome;
     }
 
-    public double getValorAcoes() {
-        return valorAcoes;
-    }
-
-    public void setValorAcoes(double valorAcoes) {
-        this.valorAcoes = valorAcoes;
-    }
+//    public double getValorAcoes() {
+//        return valorAcoes;
+//    }
+//
+//    public void setValorAcoes(double valorAcoes) {
+//        this.valorAcoes = valorAcoes;
+//    }
     
     
     
