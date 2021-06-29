@@ -310,6 +310,11 @@ public class CadastroEmpresaMB implements Serializable {
         return "";
     }
 
+    
+    
+    
+    
+    
     void randomizarPrecoAcoes() {
         listaEmpresa = getAllEmpresas();
         for (ListaEmpresaDTO empresaDTO : listaEmpresa) {//para cada empresa faça
@@ -323,10 +328,33 @@ public class CadastroEmpresaMB implements Serializable {
             
             empresa.setValorAtualAcoes(aleatorio);
             empresaDao.save(empresa);
-            System.out.println("Valor das ações foi randomizado");
+            System.out.println("Valor de compra das ações foi randomizado");
         }
+        
+        
+//        if (usuario.isInvestidor()) {
+//
+//            investidor = investDao.get(usuario.getUser().getId());
+//            listaEmpresaByAcaoInvestidor = getAllEmpresasByAcaoInvestidor(investidor.getConta().getId());
+//
+//            for (ListaEmpresaDTO empresaDTO : listaEmpresaByAcaoInvestidor) {
+//
+//                empresa = empresaDao.get(empresaDTO.getId());
+//
+//                int min = 25;
+//                int max = 150;
+//
+//                double aleatorio = (int) ThreadLocalRandom.current().nextDouble(min, max);
+//
+//                empresa.setValorAtualAcoes(aleatorio);
+//                empresaDao.save(empresa);
+//                System.out.println("Valor de venda das ações foi randomizado");
+//
+//            }
+//        }
+
     }
+
 }
 
-    
 

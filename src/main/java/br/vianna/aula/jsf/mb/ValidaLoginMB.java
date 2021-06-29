@@ -46,6 +46,13 @@ public class ValidaLoginMB {//esse trecho de codigo só será criado quando a pa
         
         if (loginMB.getUser() != null){
             loginMB.setIsLogado(true);
+            
+            
+            ////////////para randomizar valor de acoes ao logar - descomente para desabilitar
+            cadempMB.randomizarPrecoAcoes();
+            ////////////
+            
+            
             return "index"; //informando o nome da pagina a ser chamada caso a condição seja verdadeira
         }else{
             loginMB.setUser(userD.existeUsuario(loginMB.getNome(), loginMB.getSenha()));
