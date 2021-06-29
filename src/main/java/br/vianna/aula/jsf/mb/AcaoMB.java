@@ -218,10 +218,19 @@ public class AcaoMB implements Serializable {
             ct.addMessage("", new FacesMessage("Saldo insuficiente"));
 
             return "";
-        } else {
+        } else if(this.quantidadeAcao > empresa.getQuantAtualAcoes()){
+            InicializaAcao();
+            status = EStatusCrud.VIEW;
+
+            ct.addMessage("", new FacesMessage("Quandtidade de Ações indisponivel"));
+
+            return "";
+        
+        }else{
         
         
         //populando objeto acao
+        empresa.setQuantAtualAcoes(empresa.getQuantAtualAcoes()-this.quantidadeAcao);
         
         acao.setEmpresa(empresa);
         acao.setTipoTransacao(ETipoTransacao.COMPRA);
@@ -272,6 +281,8 @@ public class AcaoMB implements Serializable {
         
         //populando objeto acao
         
+        empresa.setQuantAtualAcoes(empresa.getQuantAtualAcoes()+this.quantidadeAcao);
+        
         acao.setEmpresa(empresa);
         acao.setTipoTransacao(ETipoTransacao.VENDA);
         acao.setValorTransacao(valorTransacao);
@@ -291,7 +302,7 @@ public class AcaoMB implements Serializable {
         InicializaAcao();
         status = EStatusCrud.VIEW;
 
-        ct.addMessage("", new FacesMessage("Ações vendidadas com com sucesso!"));
+        ct.addMessage("", new FacesMessage("Ações vendidas com com sucesso!"));
 
         return "";
         }
