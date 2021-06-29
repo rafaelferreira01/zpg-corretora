@@ -13,6 +13,7 @@ import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -20,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -306,6 +308,23 @@ public class CadastroEmpresaMB implements Serializable {
         listaEmpresa = getAllEmpresas();
 
         return "";
+    }
+
+    void randomizarPrecoAcoes() {
+        listaEmpresa = getAllEmpresas();
+        for (ListaEmpresaDTO empresaDTO : listaEmpresa) {//para cada empresa faça
+            
+            empresa = empresaDao.get(empresaDTO.getId());
+            
+            int min = 25;
+            int max = 100;
+                            
+            double aleatorio = (int) ThreadLocalRandom.current().nextDouble(min, max);
+            
+            empresa.setValorAtualAcoes(aleatorio);
+            empresaDao.save(empresa);
+            System.out.println("Valor das ações foi randomizado");
+        }
     }
 }
 
