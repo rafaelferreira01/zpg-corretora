@@ -234,7 +234,18 @@ public class CadastroEmpresaMB implements Serializable {
     
     
 
-    
+    public void atualizarListasMetodo() {
+        
+        listaEmpresa = getAllEmpresas();
+        
+        
+        //se for inv
+        if (usuario.isInvestidor()){
+        investidor = investDao.get(usuario.getUser().getId());
+        listaEmpresaByAcaoInvestidor = getAllEmpresasByAcaoInvestidor(investidor.getConta().getId());
+        }
+
+    }
 
     public String salvar() {
 

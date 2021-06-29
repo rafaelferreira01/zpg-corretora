@@ -14,50 +14,16 @@
     </ui:define>
 
     <ui:define name="body">
-        <h1>  Cadastro de Investidor. </h1>
-        
-        <h:messages style="color: red"   showDetail="true"/>  
 
         <h:panelGroup rendered="#{cadInvMB.estaNaView()}">
-            <p:panel header = "Pesquisar">
-
-                <h1> Pesquisa </h1>
-
-                <h:panelGrid columns="4" class="w-100">
-
-                    Nome 
-                    <h:inputText/>
-
-                    Profissão
-                    <h:inputText/>
-                    
-                    Endereço
-                    <h:inputText/>
-                    
-                    CPF
-                    <h:inputText/>
-                    
-                    Saldo inicial
-                    <h:inputText/>
-
-
-
-                </h:panelGrid>
-                <h:form>
-                    <h:commandButton class="btn btn-primary" value="Pesquisar"/>
-
-                    <h:form>     
-                        <h:commandButton class="btn btn-secondary" value="Novo Investidor" action="#{cadInvMB.trocar()}"/>
-                    </h:form>
-
-                </h:form>
-
-            </p:panel>
-
-
+            <h1>Investidores - Listagem</h1>
+            <h:messages style="color: green" showDetail="false"/> 
+            <h:form>     
+                <h:commandButton class="btn btn-dark" value="Novo" action="#{cadInvMB.trocar()}"/>
+            </h:form>
+            
             <p:dataTable var="investidor" value="#{cadInvMB.listaInvestidor}" rows="5"
                          paginator="true" emptyMessage="Não há investidores cadastrados">
-
 
                 <p:column headerText="Login">
                     <h:outputText value="#{investidor.login}" />
@@ -90,40 +56,23 @@
                 <p:column headerText="Saldo">
                     <h:outputText value="#{investidor.saldo}" />  <!-- Saldo Inicial fica salvo no dinheiro, minimo de 500 de dinheiro pra começar  -->
                 </p:column>
-
-
-
              
-                <p:column headerText="alterar">
+                <p:column headerText="Operação">
                     <h:form>
-                        <h:commandLink value="Alterar" action="#{cadInvMB.prepareEdit(investidor.id)}"/>
+                        <h:commandLink style="color: blue; font-weight:bold"  value="Alterar" action="#{cadInvMB.prepareEdit(investidor.id)}"/>
+                        <h:commandLink value=" "/>
+                        <h:commandLink style="color: red; font-weight:bold"  value="Excluir" action="#{cadInvMB.delete(investidor.id)}"/>
                     </h:form>
-                
                 </p:column>
-                
-                <p:column headerText="Excluir">
-                    <h:form>
-                        <h:commandLink value="Excluir" action="#{cadInvMB.delete(investidor.id)}"/>
-                    </h:form>
-                
-                </p:column>
-
-
-
-
-
             </p:dataTable>
-
-            <h:form>     
-                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadInvMB.trocar()}"/>
-            </h:form>
-
         </h:panelGroup>
 
 
         <h:panelGroup rendered="#{cadInvMB.status == 'INSERT' || cadInvMB.status == 'EDIT'}">
 
-            <h1> Nova Empresa </h1>
+            <h1>Investidores - Cadastro</h1>
+            <h:messages style="color: green" showDetail="false"/> 
+            
             <h:form>
                 <h:panelGrid columns="2" class="w-100">
                     
@@ -158,9 +107,10 @@
                     
                 </h:panelGrid>
 
-                <h:commandButton class="btn btn-primary" value="Salvar"  action="#{cadInvMB.salvar()}"/>
-
-                <h:commandButton class="btn btn-primary" value="Voltar" action="#{cadInvMB.voltar()}"/>
+                <h:commandButton class="btn btn-success" value="Salvar"  action="#{cadInvMB.salvar()}"/>
+            </h:form>
+            <h:form>
+                <h:commandButton class="btn btn-dark" value="Voltar" action="#{cadInvMB.voltar()}"/>
             </h:form>
         </h:panelGroup>
 

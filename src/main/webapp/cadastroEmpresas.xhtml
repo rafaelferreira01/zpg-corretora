@@ -14,41 +14,17 @@
     </ui:define>
 
     <ui:define name="body">
-        <h1>  Cadastro de Empresas. </h1>
-        
-        <h:messages style="color: red"   showDetail="true"/>  
 
         <h:panelGroup rendered="#{cadEmpMB.estaNaView()}">
-            <p:panel header = "Pesquisar">
-
-                <h1> Pesquisa </h1>
-
-                <h:panelGrid columns="4" class="w-100">
-
-                    Nome do Empresa
-                    <h:inputText/>
-
-                    Ações
-                    <h:inputText/>
-
-
-
-                </h:panelGrid>
-                <h:form>
-                    <h:commandButton class="btn btn-primary" value="Pesquisar"/>
-
-                    <h:form>     
-                        <h:commandButton class="btn btn-secondary" value="Nova Empresa" action="#{cadEmpMB.trocar()}"/>
-                    </h:form>
-
-                </h:form>
-
-            </p:panel>
-
+            
+            <h1>Empresas - Listagem</h1>
+            <h:messages style="color: green" showDetail="false"/> 
+            <h:form>     
+                <h:commandButton class="btn btn-dark" value="Novo" action="#{cadEmpMB.trocar()}"/>
+            </h:form>
 
             <p:dataTable var="empresa" value="#{cadEmpMB.lista}" rows="5"
                          paginator="true" emptyMessage="Não há empresas cadastradas">
-
 
                 <p:column headerText="Nome">
                     <h:outputText value="#{empresa.nome}" />
@@ -65,38 +41,22 @@
                 <p:column headerText="Valor">
                     <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
-
              
-                <p:column headerText="alterar">
+                <p:column headerText="Oeração">
                     <h:form>
-                        <h:commandLink value="Alterar" action="#{cadEmpMB.prepareEdit(empresa.id)}"/>
+                        <h:commandLink style="color: blue; font-weight:bold" value="Alterar" action="#{cadEmpMB.prepareEdit(empresa.id)}"/>
+                        <h:commandLink value=" "/>
+                        <h:commandLink style="color: red; font-weight:bold" value="Excluir" action="#{cadEmpMB.delete(empresa.id)}"/>
                     </h:form>
-                
                 </p:column>
-                
-                <p:column headerText="Excluir">
-                    <h:form>
-                        <h:commandLink value="Excluir" action="#{cadEmpMB.delete(empresa.id)}"/>
-                    </h:form>
-                
-                </p:column>
-
-
-
-
-
             </p:dataTable>
-
-            <h:form>     
-                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadEmpMB.trocar()}"/>
-            </h:form>
-
         </h:panelGroup>
 
 
         <h:panelGroup rendered="#{cadEmpMB.status == 'INSERT' || cadEmpMB.status == 'EDIT'}">
 
-            <h1> Nova Empresa </h1>
+           <h1>Empresas - Cadastro</h1>
+            <h:messages style="color: green" showDetail="false"/> 
             <h:form>
                 <h:panelGrid columns="2" class="w-100">
                     Nome: 
@@ -110,9 +70,10 @@
 
                 </h:panelGrid>
 
-                <h:commandButton class="btn btn-primary" value="Salvar"  action="#{cadEmpMB.salvar()}"/>
-
-                <h:commandButton class="btn btn-primary" value="Voltar" action="#{cadEmpMB.voltar()}"/>
+                <h:commandButton class="btn btn-success" value="Salvar"  action="#{cadEmpMB.salvar()}"/>
+            </h:form>
+            <h:form>
+                <h:commandButton class="btn btn-dark" value="Voltar" action="#{cadEmpMB.voltar()}"/>
             </h:form>
         </h:panelGroup>
 

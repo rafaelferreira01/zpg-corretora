@@ -52,6 +52,9 @@ public class AcaoMB implements Serializable {
     private LoginMB usuario;
     
     @Autowired
+    private CadastroEmpresaMB empMB;
+    
+    @Autowired
     private InvestidorDao investDao;
     
     @Autowired
@@ -250,7 +253,10 @@ public class AcaoMB implements Serializable {
         
         InicializaAcao();
         status = EStatusCrud.VIEW;
-
+        
+        usuario.getUser().getConta().setSaldo(conta.getSaldo());//ver como atualiza objeto na sessao
+        empMB.atualizarListasMetodo();
+        this.quantidadeAcao = 0;
         ct.addMessage("", new FacesMessage("Ações compradas com sucesso!"));
 
         return "";
@@ -301,7 +307,10 @@ public class AcaoMB implements Serializable {
         
         InicializaAcao();
         status = EStatusCrud.VIEW;
-
+        
+        usuario.getUser().getConta().setSaldo(conta.getSaldo());//ver como atualiza objeto na sessao
+        empMB.atualizarListasMetodo();
+        this.quantidadeAcao = 0;
         ct.addMessage("", new FacesMessage("Ações vendidas com com sucesso!"));
 
         return "";

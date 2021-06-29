@@ -14,50 +14,17 @@
     </ui:define>
 
     <ui:define name="body">
-        <h1>  Menu de Acoes. </h1>
-        
-        <h:messages style="color: red"   showDetail="true"/>  
 
         <h:panelGroup rendered="#{cadEmpMB.estaNaView()}">
-            <p:panel header = "Pesquisar">
-
-                <h1> Pesquisa </h1>
-
-                <h:panelGrid columns="4" class="w-100">
-
-                    Nome 
-                    <h:inputText/>
-
-                    Profissão
-                    <h:inputText/>
-                    
-                    Endereço
-                    <h:inputText/>
-                    
-                    CPF
-                    <h:inputText/>
-                    
-                    Saldo inicial
-                    <h:inputText/>
-
-                </h:panelGrid>
-                <h:form>
-                    <h:commandButton class="btn btn-primary" value="Pesquisar"/>
-
-                    <h:form>     
-                        <h:commandButton class="btn btn-secondary" value="Novo Investidor" action="#{cadEmpMB.trocar()}"/>
-                    </h:form>
-
-                </h:form>
-
-            </p:panel>
-
+            <h1>Venda de Ações</h1>
+            <h2>Saldo: $#{loginMB.user.conta.saldo}</h2>
+            <h:messages style="color: green"   showDetail="false"/> 
+            <h:form>     
+                <h:commandButton class="btn btn-dark" value="Ir para Compra" action="#{cadEmpMB.trocar()}"/>
+            </h:form>
             
-            
-            
-Saldo #{loginMB.user.conta.saldo}
-<p:dataTable var="empresa" value="#{cadEmpMB.listaEmpresaByAcaoInvestidor}" rows="5"
-                         paginator="true" emptyMessage="Não há empresas cadastradas">
+            <p:dataTable var="empresa" value="#{cadEmpMB.listaEmpresaByAcaoInvestidor}" rows="8"
+                         paginator="true" emptyMessage="Não há ações disponiveis">
 
                 <p:column headerText="Empresa">
                     <h:outputText value="#{empresa.nome}" />
@@ -67,32 +34,34 @@ Saldo #{loginMB.user.conta.saldo}
                     <h:outputText value="#{empresa.quantAcoesCompradas}" />
                 </p:column>
 
-                <p:column headerText="Val Atual das Ações">
+                <p:column headerText="Val Atual de Venda">
                     <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
                 
              
                 <p:column headerText="Vender">
                     <h:form>
-                        <h:inputText value="#{acaoMB.quantidadeAcao}" />
+                        <h:inputText size="8" value="#{acaoMB.quantidadeAcao}" />
                         <!--<f:validateLongRange minimum="20" maximum="1000" />-->
                         
-                        <h:commandLink value="vender" action="#{acaoMB.vender(empresa.id)}" />
+                        <h:commandLink style="color: blue; font-weight:bold" value="Vender" action="#{acaoMB.vender(empresa.id)}" />
                     </h:form>
                 </p:column>
 
             </p:dataTable>
-
-            <h:form>     
-                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadEmpMB.trocar()}"/>
-            </h:form>
-
         </h:panelGroup>
 
-
+        
+        
         <h:panelGroup rendered="#{cadEmpMB.status == 'INSERT' }">
+            <h1>Compra de Ações</h1>
+            <h2>Saldo: $#{loginMB.user.conta.saldo}</h2>
+            <h:messages style="color: green"   showDetail="false"/> 
+            <h:form>     
+                <h:commandButton class="btn btn-dark" value="Ir para Venda" action="#{cadEmpMB.voltar()}"/>
+            </h:form>
             <p:dataTable var="empresa" value="#{cadEmpMB.lista}" rows="5"
-                         paginator="true" emptyMessage="Não há empresas cadastradas">
+                         paginator="true" emptyMessage="Não há ações disponiveis">
 
                 <p:column headerText="Empresa">
                     <h:outputText value="#{empresa.nome}" />
@@ -102,21 +71,22 @@ Saldo #{loginMB.user.conta.saldo}
                     <h:outputText value="#{empresa.quantAtualAcoes}" />
                 </p:column>
 
-                <p:column headerText="Val Atual das Ações">
+                <p:column headerText="Val Atual de Compra">
                     <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
                 
              
-                <p:column headerText="Vender">
+                <p:column headerText="Comprar">
                     <h:form>
-                        <h:inputText value="#{acaoMB.quantidadeAcao}" />
+                        <h:inputText size="8" value="#{acaoMB.quantidadeAcao}" />
                         <!--<f:validateLongRange minimum="20" maximum="1000" />-->
                         
-                        <h:commandLink value="Comprar" action="#{acaoMB.comprar(empresa.id)}" />
+                        <h:commandLink  style="color: green; font-weight:bold"  value="Comprar" action="#{acaoMB.comprar(empresa.id)}" />
                     </h:form>
                 </p:column>
 
             </p:dataTable>
+            
         </h:panelGroup>
 
 
