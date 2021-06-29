@@ -7,8 +7,6 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
-    
-    
     <ui:define name="title">
         Cadastro de Empresas
     </ui:define>
@@ -42,7 +40,7 @@
                     <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
              
-                <p:column headerText="Oeração">
+                <p:column headerText="Operação">
                     <h:form>
                         <h:commandLink style="color: blue; font-weight:bold" value="Alterar" action="#{cadEmpMB.prepareEdit(empresa.id)}"/>
                         <h:commandLink value=" "/>
@@ -58,12 +56,14 @@
            <h1>Empresas - Cadastro</h1>
             <h:messages style="color: green" showDetail="false"/> 
             <h:form>
-                <h:panelGrid columns="2" class="w-100">
+                <h:panelGrid columns="6" class="w-100">
                     Nome: 
                     <h:inputText value="#{cadEmpMB.empresa.nome}" required="true" requiredMessage="O nome não pode estar vazio!"/>
 
-                    Quantidade da Ações: 
-                    <h:inputText value="#{cadEmpMB.empresa.quantTotalAcoes}" required="true" requiredMessage="O campo de quantidade de ações não pode estar vazio!"/>
+                    <ui:fragment rendered="#{cadEmpMB.status != 'EDIT'}">
+                        Quantidade da Ações: 
+                        <h:inputText value="#{cadEmpMB.empresa.quantTotalAcoes}" required="true" requiredMessage="O campo de quantidade de ações não pode estar vazio!"/>
+                    </ui:fragment>
                     
                     Valor das Ações: 
                     <h:inputText value="#{cadEmpMB.empresa.valorAtualAcoes}" required="true" requiredMessage="O campo valor das ações não pode estar vazio!"/>

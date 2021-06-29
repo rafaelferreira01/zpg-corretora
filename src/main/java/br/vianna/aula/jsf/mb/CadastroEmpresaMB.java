@@ -150,7 +150,7 @@ public class CadastroEmpresaMB implements Serializable {
 
     public String voltar() {
         status = EStatusCrud.VIEW;
-
+        
         return "";
     }
 

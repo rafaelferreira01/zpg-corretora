@@ -32,6 +32,7 @@ public class EmpresaDao {
         if (e.getId() > 0){//se o id for maior que 0 significa que é um registro que ja existe, isso té, estão dando um update no registro
             conexao.merge(e);//atualizando uma edicao (update)
         }else{//caso contrario eh um novo registro
+            e.setQuantAtualAcoes(e.getQuantTotalAcoes());
             conexao.persist(e);//inserindo...
         }
         return e;
