@@ -317,7 +317,7 @@ public class CadastroEmpresaMB implements Serializable {
             empresa = empresaDao.get(empresaDTO.getId());
             
             int min = 25;
-            int max = 100;
+            int max = 150;
                             
             double aleatorio = (int) ThreadLocalRandom.current().nextDouble(min, max);
             

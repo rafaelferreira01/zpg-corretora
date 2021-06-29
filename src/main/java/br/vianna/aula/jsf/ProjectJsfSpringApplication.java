@@ -27,7 +27,7 @@ public class ProjectJsfSpringApplication implements CommandLineRunner{
         
     @Override
     public void run(String... args) throws Exception {//vai ser executado sempre que o servidor subir
-        System.out.println("Server ON!");
+//        System.out.println("Server ON!");
 ////        System.out.println("a::"+Utils.md5("a"));
 //        
 //        Usuario u = new Usuario(0, "Zezin", "ze@ze","ze", Utils.md5("123"), ETipoUsuario.ADMIN);
@@ -39,7 +39,7 @@ public class ProjectJsfSpringApplication implements CommandLineRunner{
 //                0, "PedrinIvstidor", "pedrin@pedr", "ped", Utils.md5("123"));///cria o investidor passando a conta
 ////        c.setInvestidor(i);//passa o investidor pra dentro da conta
 //        InvestD.save(i);//salva o investidor
-    
+    System.out.println("Server ON!");
     }
 
 }

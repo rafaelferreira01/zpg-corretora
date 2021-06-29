@@ -22,7 +22,7 @@
                 <h:commandButton class="btn btn-dark" value="Novo" action="#{cadInvMB.trocar()}"/>
             </h:form>
             
-            <p:dataTable var="investidor" value="#{cadInvMB.listaInvestidor}" rows="5"
+            <p:dataTable var="investidor" value="#{cadInvMB.listaInvestidor}" rows="10"
                          paginator="true" emptyMessage="Não há investidores cadastrados">
 
                 <p:column headerText="Login">
