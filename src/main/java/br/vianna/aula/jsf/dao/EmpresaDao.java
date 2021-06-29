@@ -68,6 +68,18 @@ public class EmpresaDao {
         return (ArrayList<ListaEmpresaDTO>) q.getResultList();
     }
     
+    public int getQuandtidadeAcoesAtualVender(int idempresa, int idconta) {//retorna a quantidade de acoes na hora de vender, pra checar se tem a quantidade disponivel
+        
+        Query q = conexao.createQuery("SELECT sum(a.quantidadeAcoesTransacao) "
+                    + " FROM Acao a "
+                    + " WHERE a.empresa.id = :idempresa and a.conta.id = :idconta "
+                    + " GROUP BY a.empresa.id ");
+          
+          q.setParameter("idempresa", idempresa);
+          q.setParameter("idconta", idconta);
+        return (int)(long)q.getSingleResult();
+
+    }
     
     
     
@@ -81,6 +93,8 @@ public class EmpresaDao {
         conexao.remove(e);//apaga ele do banco de dados
         return e;//retorna ele
     }
+
+    
     
 }
 

@@ -242,7 +242,56 @@ public class AcaoMB implements Serializable {
         InicializaAcao();
         status = EStatusCrud.VIEW;
 
-        ct.addMessage("", new FacesMessage("Empresa salva com sucesso!"));
+        ct.addMessage("", new FacesMessage("Ações compradas com sucesso!"));
+
+        return "";
+        }
+    }
+    
+    
+    public String vender(int id) {
+
+        FacesContext ct = FacesContext.getCurrentInstance();
+        empresa = empresaDao.get(id);
+        valorTransacao = empresa.getValorAtualAcoes()*this.quantidadeAcao;
+//        user = usuario.getUser();//usuario logado atualmente
+        investidor = investDao.get(usuario.getUser().getId());
+        Conta conta = investidor.getConta();
+        
+        int quantidadeAtualEspecifica = empresaDao.getQuandtidadeAcoesAtualVender(empresa.getId(), conta.getId());//quandotidade atual das acoes da empresa que esta tentando vender
+        
+        if(this.quantidadeAcao > quantidadeAtualEspecifica){
+            InicializaAcao();
+            status = EStatusCrud.VIEW;
+
+            ct.addMessage("", new FacesMessage("Ações insuficientes"));
+
+            return "";
+        } else {
+        
+        
+        //populando objeto acao
+        
+        acao.setEmpresa(empresa);
+        acao.setTipoTransacao(ETipoTransacao.VENDA);
+        acao.setValorTransacao(valorTransacao);
+        acao.setDataTransacao(new Date());
+        acao.setConta(conta);
+        acao.setQuantidadeAcoesTransacao(this.quantidadeAcao =- this.quantidadeAcao);
+        
+        conta.setSaldo(conta.getSaldo()+valorTransacao);
+        
+        //
+        investDao.save(investidor);//atualizando investidor
+        acaoDao.save(acao);//atualizando acao
+        
+        
+        //atualizando o DTO que esta exibindo as informacoes no menu - só aparece depois que loga novamente
+        
+        InicializaAcao();
+        status = EStatusCrud.VIEW;
+
+        ct.addMessage("", new FacesMessage("Ações vendidadas com com sucesso!"));
 
         return "";
         }
