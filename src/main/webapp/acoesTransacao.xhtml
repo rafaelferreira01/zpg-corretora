@@ -40,8 +40,6 @@
                     Saldo inicial
                     <h:inputText/>
 
-
-
                 </h:panelGrid>
                 <h:form>
                     <h:commandButton class="btn btn-primary" value="Pesquisar"/>
@@ -54,7 +52,45 @@
 
             </p:panel>
 
+            
+            
+            
+Saldo #{loginMB.user.conta.saldo}
+<p:dataTable var="empresa" value="#{cadEmpMB.listaEmpresaByAcaoInvestidor}" rows="5"
+                         paginator="true" emptyMessage="Não há empresas cadastradas">
 
+                <p:column headerText="Empresa">
+                    <h:outputText value="#{empresa.nome}" />
+                </p:column>
+                
+                <p:column headerText="Ações na Carteira">
+                    <h:outputText value="#{empresa.quantAcoesCompradas}" />
+                </p:column>
+
+                <p:column headerText="Val Atual das Ações">
+                    <h:outputText value="#{empresa.valorAtualAcoes}" />
+                </p:column>
+                
+             
+                <p:column headerText="Vender">
+                    <h:form>
+                        <h:inputText value="#{acaoMB.quantidadeAcao}" />
+                        <!--<f:validateLongRange minimum="20" maximum="1000" />-->
+                        
+                        <h:commandLink value="vender" action="#{acaoMB.comprar(empresa.id)}" />
+                    </h:form>
+                </p:column>
+
+            </p:dataTable>
+
+            <h:form>     
+                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadEmpMB.trocar()}"/>
+            </h:form>
+
+        </h:panelGroup>
+
+
+        <h:panelGroup rendered="#{cadEmpMB.status == 'INSERT' }">
             <p:dataTable var="empresa" value="#{cadEmpMB.lista}" rows="5"
                          paginator="true" emptyMessage="Não há empresas cadastradas">
 
@@ -76,54 +112,11 @@
                         <h:inputText value="#{acaoMB.quantidadeAcao}" />
                         <!--<f:validateLongRange minimum="20" maximum="1000" />-->
                         
-                        <h:commandLink value="AAAAAA" action="#{acaoMB.comprar(empresa.id)}" />
+                        <h:commandLink value="Comprar" action="#{acaoMB.comprar(empresa.id)}" />
                     </h:form>
                 </p:column>
 
             </p:dataTable>
-
-            <h:form>     
-                <h:commandButton class="btn btn-primary" value="Trocar" action="#{cadEmpMB.trocar()}"/>
-            </h:form>
-
-        </h:panelGroup>
-
-
-        <h:panelGroup rendered="#{cadEmpMB.status == 'INSERT' }">
-
-            <h1> Nova Empresa </h1>
-            <h:form>
-       <p:dataTable var="empresa" value="#{cadEmpMB.lista}" rows="5"
-                         paginator="true" emptyMessage="Não há empresas cadastradas">
-
-                <p:column headerText="Empresa">
-                    <h:outputText value="#{empresa.nome}" />
-                </p:column>
-                
-                <p:column headerText="Quantidade Disponivel de Ações">
-                    <h:outputText value="#" />
-                </p:column>
-
-                <p:column headerText="Val Atual das Ações">
-                    <h:outputText value="#{empresa.valorAtualAcoes}" />
-                </p:column>
-                
-             
-                <p:column headerText="Vender">
-                    <h:form>
-                        <h:inputText binding="#{quant}" />
-                        <!--<f:validateLongRange minimum="20" maximum="1000" />-->
-                        
-                        <h:commandLink value="Comprar" action="#{acaoMB.comprar(empresa.id, quant.value)}" />
-                    </h:form>
-                    
-                    <h:form>     
-                        <h:commandButton class="btn btn-secondary" value="aaaaa" action="#{acaoMB.comprar(empresa.id, quant.value)}"/>
-                    </h:form>
-                </p:column>
-
-            </p:dataTable>
-            </h:form>
         </h:panelGroup>
 
 

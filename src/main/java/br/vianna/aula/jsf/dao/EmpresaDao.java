@@ -40,11 +40,36 @@ public class EmpresaDao {
 
     public ArrayList<ListaEmpresaDTO> getAllEmpresas() {
       
-          Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.quantTotalAcoes,e.valorAtualAcoes)"
+          Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.quantTotalAcoes,e.quantAtualAcoes,e.valorAtualAcoes)"
                     + " from Empresa e");
  
+          
+//          Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.quantTotalAcoes,sum(a.quantidadeAcoesTransacao),e.valorAtualAcoes)"
+//                    + " from Empresa e "
+//                    + " right join e.listaAcoes a"
+//                    + " group by a.empresa");
+          
+//          Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.quantTotalAcoes,sum(a.quantidadeAcoesTransacao),e.valorAtualAcoes)"
+//                    + " from Empresa e, Acao a"
+//                  + " where a.id = e.id");
         return (ArrayList<ListaEmpresaDTO>) q.getResultList();
     }
+    
+    public ArrayList<ListaEmpresaDTO> getAllEmpresasByAcaoInvestidor(int id) {//
+      
+          Query q = conexao.createQuery("SELECT new "+src+"ListaEmpresaDTO(e.id,e.nome,e.quantTotalAcoes,sum(a.quantidadeAcoesTransacao), e.valorAtualAcoes)"
+                    + " FROM Empresa e "
+                    + " RIGHT JOIN e.listaAcoes a"
+                    + " WHERE a.conta.id = :id "
+                    + " GROUP BY a.empresa "
+                    + " HAVING sum(a.quantidadeAcoesTransacao) > 0 ");
+          
+          q.setParameter("id", id);
+        return (ArrayList<ListaEmpresaDTO>) q.getResultList();
+    }
+    
+    
+    
     
     public Empresa get(int id) {
         return conexao.find(Empresa.class, id);

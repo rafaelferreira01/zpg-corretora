@@ -39,6 +39,9 @@ public class Empresa{
     private int quantTotalAcoes;
     
     @NotNull
+    private int quantAtualAcoes;
+    
+    @NotNull
     private Double valorAtualAcoes;
     
     @OneToMany(mappedBy="empresa")
@@ -48,10 +51,11 @@ public class Empresa{
         this.listaAcoes = new ArrayList<>();//nao tenho certeza se está certo
     }
 
-    public Empresa(int id, String nome, int quantTotalAcoes, Double valorAtualAcoes) {
+    public Empresa(int id, String nome, int quantTotalAcoes, int quantAtualAcoes,  Double valorAtualAcoes) {
         this.id = id;
         this.nome = nome;
         this.quantTotalAcoes = quantTotalAcoes;
+        this.quantAtualAcoes = quantAtualAcoes;
         this.valorAtualAcoes = valorAtualAcoes;
         this.listaAcoes = new ArrayList<>();
     }
@@ -78,6 +82,14 @@ public class Empresa{
 
     public void setQuantTotalAcoes(int quantTotalAcoes) {
         this.quantTotalAcoes = quantTotalAcoes;
+    }
+
+    public int getQuantAtualAcoes() {
+        return quantAtualAcoes;
+    }
+
+    public void setQuantAtualAcoes(int quantAtualAcoes) {
+        this.quantAtualAcoes = quantAtualAcoes;
     }
 
     public Double getValorAtualAcoes() {

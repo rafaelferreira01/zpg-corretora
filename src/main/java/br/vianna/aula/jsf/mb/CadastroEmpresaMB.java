@@ -6,8 +6,10 @@
 package br.vianna.aula.jsf.mb;
 
 import br.vianna.aula.jsf.dao.EmpresaDao;
+import br.vianna.aula.jsf.dao.InvestidorDao;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
+import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,14 +33,27 @@ public class CadastroEmpresaMB implements Serializable {
         private EStatusCrud status;
 
     private ArrayList<ListaEmpresaDTO> listaEmpresa;
+    
+    private ArrayList<ListaEmpresaDTO> listaEmpresaByAcaoInvestidor;
 
     private Empresa empresa;
     
     private String nome;
     
+    private Investidor investidor;
+    
 //    private double valorAcoes;
 
-
+    /////////////////////////////////
+    @Autowired
+    private LoginMB usuario;
+    
+    @Autowired
+    private InvestidorDao investDao;
+        
+    ////////////////////////////////
+    
+    
     @Autowired
     private EmpresaDao empresaDao;
 
@@ -54,6 +69,7 @@ public class CadastroEmpresaMB implements Serializable {
   
 
         listaEmpresa = new ArrayList<>();
+        listaEmpresaByAcaoInvestidor = new ArrayList<>();
 //        lista.add (new ListaPetDTO("Fofinho", "Masculino","Gato","Rafael", true));
 //        lista.add (new ListaPetDTO("Rufus", "Masculino","Cachorro",null, false));
 //        lista.add (new ListaPetDTO("Cassandra", "Feminino","Gato","Leonardo", true));
@@ -70,20 +86,50 @@ public class CadastroEmpresaMB implements Serializable {
         
     }
 
-    public CadastroEmpresaMB(EStatusCrud status, ArrayList<ListaEmpresaDTO> listaEmpresa, Empresa empresa, EmpresaDao empresaDao) {
+    public CadastroEmpresaMB(EStatusCrud status, ArrayList<ListaEmpresaDTO> listaEmpresa, ArrayList<ListaEmpresaDTO> listaEmpresaByAcaoInvestidor, Empresa empresa, EmpresaDao empresaDao) {
         this.status = status;
         this.listaEmpresa = listaEmpresa;
+        this.listaEmpresaByAcaoInvestidor = listaEmpresaByAcaoInvestidor;
         this.empresa = empresa;
         this.empresaDao = empresaDao;
     }
-    
-    
 
+    public CadastroEmpresaMB(EStatusCrud status, ArrayList<ListaEmpresaDTO> listaEmpresa, ArrayList<ListaEmpresaDTO> listaEmpresaByAcaoInvestidor, Empresa empresa, LoginMB usuario, EmpresaDao empresaDao) {
+        this.status = status;
+        this.listaEmpresa = listaEmpresa;
+        this.listaEmpresaByAcaoInvestidor = listaEmpresaByAcaoInvestidor;
+        this.empresa = empresa;
+        this.usuario = usuario;
+        this.empresaDao = empresaDao;
+    }
+
+//    @PostConstruct
+//    public void init() {
+//
+//        listaEmpresa = getAllEmpresas();
+//
+//    }
+    
     @PostConstruct
     public void init() {
-
+        
         listaEmpresa = getAllEmpresas();
+        
+        
+        //se for inv
+        if (usuario.isInvestidor()){
+        investidor = investDao.get(usuario.getUser().getId());
+        listaEmpresaByAcaoInvestidor = getAllEmpresasByAcaoInvestidor(investidor.getConta().getId());
+        }
 
+    }
+
+    public LoginMB getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(LoginMB usuario) {
+        this.usuario = usuario;
     }
 
     public EStatusCrud getStatus() {
@@ -110,6 +156,31 @@ public class CadastroEmpresaMB implements Serializable {
         return status == EStatusCrud.VIEW;
     }
 
+    public ArrayList<ListaEmpresaDTO> getListaEmpresaByAcaoInvestidor() {
+        return listaEmpresaByAcaoInvestidor;
+    }
+
+    public void setListaEmpresaByAcaoInvestidor(ArrayList<ListaEmpresaDTO> listaEmpresaByAcaoInvestidor) {
+        this.listaEmpresaByAcaoInvestidor = listaEmpresaByAcaoInvestidor;
+    }
+
+    public Investidor getInvestidor() {
+        return investidor;
+    }
+
+    public void setInvestidor(Investidor investidor) {
+        this.investidor = investidor;
+    }
+
+    public InvestidorDao getInvestDao() {
+        return investDao;
+    }
+
+    public void setInvestDao(InvestidorDao investDao) {
+        this.investDao = investDao;
+    }
+
+    
     public ArrayList<ListaEmpresaDTO> getLista() {
         return listaEmpresa;
     }
@@ -168,7 +239,8 @@ public class CadastroEmpresaMB implements Serializable {
     public String salvar() {
 
         FacesContext ct = FacesContext.getCurrentInstance();
-   
+        
+//        empresa.setQuantAtualAcoes(empresa.getQuantTotalAcoes());
         empresaDao.save(empresa);
         
         InicializaEmpresa();
@@ -179,9 +251,22 @@ public class CadastroEmpresaMB implements Serializable {
 
         return "";
     }
+    
+    
+    
+    
+    private ArrayList<ListaEmpresaDTO> getAllEmpresasByAcaoInvestidor(int id) {
+        
+        ArrayList<ListaEmpresaDTO> listaEmpresaByAcaoInvestidor = new ArrayList<>();
 
+        listaEmpresaByAcaoInvestidor.addAll(empresaDao.getAllEmpresasByAcaoInvestidor(id));
 
-
+        return listaEmpresaByAcaoInvestidor;
+    }
+    
+    
+    
+    
 
     private ArrayList<ListaEmpresaDTO> getAllEmpresas() {
         ArrayList<ListaEmpresaDTO> listaEmpresa = new ArrayList<>();

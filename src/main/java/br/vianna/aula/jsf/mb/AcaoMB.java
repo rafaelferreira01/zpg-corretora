@@ -7,11 +7,14 @@ package br.vianna.aula.jsf.mb;
 
 import br.vianna.aula.jsf.dao.AcaoDao;
 import br.vianna.aula.jsf.dao.EmpresaDao;
+import br.vianna.aula.jsf.dao.InvestidorDao;
 import br.vianna.aula.jsf.model.acao.Acao;
 import br.vianna.aula.jsf.model.acao.ETipoTransacao;
+import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
+import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,19 +37,14 @@ import org.springframework.stereotype.Component;
 public class AcaoMB implements Serializable {
         private EStatusCrud status;
 
-//    private ArrayList<ListaEmpresaDTO> listaEmpresa;
         
     private UsuarioLogadoDTO user;
-//
     private Empresa empresa;
-//    
     private int quantidadeAcao;
-//    private String nome;
-//    
-//    private double valorAcoes;
-    
+    private double valorTransacao;
     private Acao acao;
-
+    private Investidor investidor;
+    
     @Autowired
     private AcaoDao acaoDao;
     
@@ -54,68 +52,21 @@ public class AcaoMB implements Serializable {
     private LoginMB usuario;
     
     @Autowired
+    private InvestidorDao investDao;
+    
+    @Autowired
     private EmpresaDao empresaDao;
-
-//    @Autowired//injetando
-//    private EmpresaDao empDao; 
 
     public AcaoMB() {
         status = EStatusCrud.VIEW;
 
-        System.out.println("sssssssssssssssssssss");
-
         InicializaAcao();
-//  
-
-//        listaEmpresa = new ArrayList<>();
-////        lista.add (new ListaPetDTO("Fofinho", "Masculino","Gato","Rafael", true));
-////        lista.add (new ListaPetDTO("Rufus", "Masculino","Cachorro",null, false));
-////        lista.add (new ListaPetDTO("Cassandra", "Feminino","Gato","Leonardo", true));
-////        lista.add (new ListaPetDTO("Tontão", "Masculino","Cachorro",null, true));
-////        lista.add (new ListaPetDTO("Dragoa", "Feminino","Gato",null, true));
-////        lista.add (new ListaPetDTO("Felpuda", "Feminino","Gato","Daves", true));
     }
-//
+
     private void InicializaAcao() {
         acao = new Acao();
-        //    animal.setNome("abc");
-      //  empresa.setListaAcoes();
-//        empresa.setValorAtualAcoes(100.00);
         
     }
-//
-//    public AcaoMB(EStatusCrud status, ArrayList<ListaEmpresaDTO> listaEmpresa, Empresa empresa, EmpresaDao empresaDao) {
-//        this.status = status;
-//        this.listaEmpresa = listaEmpresa;
-//        this.empresa = empresa;
-//        this.empresaDao = empresaDao;
-//    }
-    
-    
-
-//    @PostConstruct
-//    public void init() {
-//
-//        listaEmpresa = getAllEmpresas();
-//
-//    }
-//
-//    public EStatusCrud getStatus() {
-//        return status;
-//    }
-//}
-
-//    public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, Acao acao, AcaoDao acaoDao, EmpresaDao empresaDao) {
-//        this.status = status;
-//        this.user = user;
-//        this.empresa = empresa;
-//        this.acao = acao;
-//        this.acaoDao = acaoDao;
-//        this.empresaDao = empresaDao;
-//        
-//    }
-    
-    
     
     public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, int quantidadeAcao, Acao acao, AcaoDao acaoDao, LoginMB usuario, EmpresaDao empresaDao) {
         this.status = status;
@@ -126,6 +77,39 @@ public class AcaoMB implements Serializable {
         this.acaoDao = acaoDao;
         this.usuario = usuario;
         this.empresaDao = empresaDao;
+    }
+
+    public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, int quantidadeAcao, double valorTransacao, Acao acao, Investidor investidor, AcaoDao acaoDao, LoginMB usuario, InvestidorDao investDao, EmpresaDao empresaDao) {
+        this.status = status;
+        this.user = user;
+        this.empresa = empresa;
+        this.quantidadeAcao = quantidadeAcao;
+        this.valorTransacao = valorTransacao;
+        this.acao = acao;
+        this.investidor = investidor;
+        this.acaoDao = acaoDao;
+        this.usuario = usuario;
+        this.investDao = investDao;
+        this.empresaDao = empresaDao;
+    }
+
+    public Investidor getInvestidor() {
+        return investidor;
+    }
+
+    public void setInvestidor(Investidor investidor) {
+        this.investidor = investidor;
+    }
+
+    
+
+    
+    public InvestidorDao getInvestDao() {
+        return investDao;
+    }
+
+    public void setInvestDao(InvestidorDao investDao) {
+        this.investDao = investDao;
     }
 
     public void setStatus(EStatusCrud status) {
@@ -164,22 +148,6 @@ public class AcaoMB implements Serializable {
         this.usuario = usuario;
     }
 
-    
-//    public ArrayList<ListaEmpresaDTO> getLista() {
-//        return listaEmpresa;
-//    }
-//
-//    public void setLista(ArrayList<ListaEmpresaDTO> lista) {
-//        this.listaEmpresa = listaEmpresa;
-//    }
-//
-//    public ArrayList<ListaEmpresaDTO> getListaEmpresa() {
-//        return listaEmpresa;
-//    }
-//
-//    public void setListaEmpresa(ArrayList<ListaEmpresaDTO> listaEmpresa) {
-//        this.listaEmpresa = listaEmpresa;
-//    }
 
     public Empresa getEmpresa() {
         return empresa;
@@ -198,21 +166,6 @@ public class AcaoMB implements Serializable {
         this.empresaDao = empresaDao;
     }
 
-//    public String getNome() {
-//        return nome;
-//    }
-//
-//    public void setNome(String nome) {
-//        this.nome = nome;
-//    }
-
-//    public double getValorAcoes() {
-//        return valorAcoes;
-//    }
-//
-//    public void setValorAcoes(double valorAcoes) {
-//        this.valorAcoes = valorAcoes;
-//    }
 
     public UsuarioLogadoDTO getUser() {
         return user;
@@ -237,65 +190,65 @@ public class AcaoMB implements Serializable {
     public void setAcaoDao(AcaoDao acaoDao) {
         this.acaoDao = acaoDao;
     }
-    
+
+    public double getValorTransacao() {
+        return valorTransacao;
+    }
+
+    public void setValorTransacao(double valorTransacao) {
+        this.valorTransacao = valorTransacao;
+    }
     
     
     
     ///////////////////////////////////////////
     public String comprar(int id) {
-//        empresa = empresaDao.get(id);
-//        System.out.println(empresa.getNome()+"EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-//        acao.setEmpresa(empresa);
-        
-        
-//        acao.setConta(usuario.getUser().getConta());
-//        System.out.println(usuario.getUser().getNome()+"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
-        
-        
 
         FacesContext ct = FacesContext.getCurrentInstance();
-        
-        System.out.println(usuario.getUser().getConta()+"   \nAAAAAAAAAAAAAAAAAAAAAA");
-   
-//        acao = acaoDao.get(id);
         empresa = empresaDao.get(id);
+        valorTransacao = empresa.getValorAtualAcoes()*this.quantidadeAcao;
+//        user = usuario.getUser();//usuario logado atualmente
+        investidor = investDao.get(usuario.getUser().getId());
+        Conta conta = investidor.getConta();
+        
+        if(conta.getSaldo() < valorTransacao){
+            InicializaAcao();
+            status = EStatusCrud.VIEW;
+
+            ct.addMessage("", new FacesMessage("Saldo insuficiente"));
+
+            return "";
+        } else {
+        
+        
+        //populando objeto acao
+        
         acao.setEmpresa(empresa);
         acao.setTipoTransacao(ETipoTransacao.COMPRA);
-        acao.setValorTransacao(empresa.getValorAtualAcoes()*this.quantidadeAcao);
-        acao.setQuantidadeAcoesTransacao(this.quantidadeAcao);
+        acao.setValorTransacao(valorTransacao);
         acao.setDataTransacao(new Date());
-        acao.setConta(usuario.getUser().getConta());
+        acao.setConta(conta);
+        acao.setQuantidadeAcoesTransacao(this.quantidadeAcao);
+        
+        conta.setSaldo(conta.getSaldo()-valorTransacao);
+        
+        //
+        investDao.save(investidor);//atualizando investidor
+        acaoDao.save(acao);//atualizando acao
         
         
-        acaoDao.save(acao);
+        //atualizando o DTO que esta exibindo as informacoes no menu - só aparece depois que loga novamente
         
         InicializaAcao();
         status = EStatusCrud.VIEW;
-//        listaEmpresa = getAllEmpresas();
 
         ct.addMessage("", new FacesMessage("Empresa salva com sucesso!"));
 
         return "";
+        }
     }
 
     
-
-//    public String salvar() {
-//
-//        FacesContext ct = FacesContext.getCurrentInstance();
-//   
-//        empresaDao.save(empresa);
-//        
-//        InicializaEmpresa();
-//        status = EStatusCrud.VIEW;
-//        listaEmpresa = getAllEmpresas();
-//
-//        ct.addMessage("", new FacesMessage("Empresa salva com sucesso!"));
-//
-//        return "";
-//    }
-
-
 
 
     private ArrayList<ListaEmpresaDTO> getAllEmpresas() {
@@ -312,20 +265,6 @@ public class AcaoMB implements Serializable {
         return "";
     }
 
-//    public String delete(int id) {
-//
-//        FacesContext ct = FacesContext.getCurrentInstance();
-//
-//        Empresa aux = null;
-//
-//        aux = empresaDao.delete(id);
-//      
-//        ct.addMessage("", new FacesMessage(aux.getNome() + " excluído com sucesso!"));
-//
-//        listaEmpresa = getAllEmpresas();
-//
-//        return "";
-//    }
 }
 
     
