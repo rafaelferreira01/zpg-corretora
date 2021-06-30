@@ -35,10 +35,10 @@ public class ValidaLoginMB {//esse trecho de codigo só será criado quando a pa
     @Autowired//injeção de dependenicia - essa notação faz com que seja utilizado o objeto loginMB que ja foi criado pelo controler ao invés de criar um loginMB novo
     private LoginMB loginMB;
     
-    ////////////para randomizar valor de acoes ao logar
-    @Autowired
-    private CadastroEmpresaMB cadempMB;
-    ////////////
+//    ////////////para randomizar valor de acoes ao logar
+//    @Autowired
+//    private CadastroEmpresaMB cadempMB;
+//    ////////////
     
     public String VerificaPassword(){
         loginMB.setUser(investD.existeInvestidor(loginMB.getNome(), loginMB.getSenha()));
@@ -48,9 +48,9 @@ public class ValidaLoginMB {//esse trecho de codigo só será criado quando a pa
             loginMB.setIsLogado(true);
             
             
-            ////////////para randomizar valor de acoes ao logar - descomente para desabilitar
-            cadempMB.randomizarPrecoAcoes();
-            ////////////
+//            ////////////para randomizar valor de acoes ao logar - descomente para desabilitar
+//            cadempMB.randomizarPrecoAcoes();
+//            ////////////
             
             
             return "index"; //informando o nome da pagina a ser chamada caso a condição seja verdadeira
@@ -61,9 +61,9 @@ public class ValidaLoginMB {//esse trecho de codigo só será criado quando a pa
             loginMB.setIsLogado(true);
             
             
-            ////////////para randomizar valor de acoes ao logar - descomente para desabilitar
-            cadempMB.randomizarPrecoAcoes();
-            ////////////
+//            ////////////para randomizar valor de acoes ao logar - descomente para desabilitar
+//            cadempMB.randomizarPrecoAcoes();
+//            ////////////
             
             
             return "index"; //informando o nome da pagina a ser chamada caso a condição seja verdadeira

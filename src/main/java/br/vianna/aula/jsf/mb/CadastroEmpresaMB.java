@@ -63,6 +63,9 @@ public class CadastroEmpresaMB implements Serializable {
 //    private EmpresaDao empDao; 
 
     public CadastroEmpresaMB() {
+        
+        
+        
         status = EStatusCrud.VIEW;
 
         
@@ -114,6 +117,7 @@ public class CadastroEmpresaMB implements Serializable {
     
     @PostConstruct
     public void init() {
+        randomizarPrecoAcoes();
         
         listaEmpresa = getAllEmpresas();
         
