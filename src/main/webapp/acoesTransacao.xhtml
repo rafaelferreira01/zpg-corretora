@@ -44,7 +44,7 @@
                 </p:column>-->
                 
                 <p:column headerText="Val Atual de Venda">
-                    <h:outputText value="#{empresa.valorAtualAcoes + corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)} (un: #{empresa.valorAtualAcoes} + co: #{corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)})" />
+                    <h:outputText value="#{empresa.valorAtualAcoes - corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)} (un: #{empresa.valorAtualAcoes} - co: #{corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)})" />
                 </p:column>
                 
              

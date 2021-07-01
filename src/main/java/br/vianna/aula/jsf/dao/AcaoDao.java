@@ -6,6 +6,8 @@
 package br.vianna.aula.jsf.dao;
 
 import br.vianna.aula.jsf.model.acao.Acao;
+import br.vianna.aula.jsf.model.conta.Conta;
+import br.vianna.aula.jsf.model.dto.ListaAcaoDTO;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
 import java.util.ArrayList;
@@ -56,6 +58,27 @@ public class AcaoDao {
  
         return (ArrayList<ListaEmpresaDTO>) q.getResultList();
     }
+    
+    
+    public ArrayList<ListaAcaoDTO> buscaHistoricoTransacoes(Conta conta) {//
+      
+          Query q = conexao.createQuery("SELECT new "+src+"ListaAcaoDTO(a.id,a.conta,a.empresa,a.valorTransacao,a.quantidadeAcoesTransacao,a.dataTransacao,a.tipoTransacao)"
+                    + " FROM Acao a "
+                     + " WHERE a.conta = :conta"
+                     + " ORDER BY a.id DESC");
+          q.setParameter("conta", conta);
+        return (ArrayList<ListaAcaoDTO>) q.getResultList();
+    }
+    
+    public ArrayList<ListaAcaoDTO> buscaHistoricoTransacoesTodasEmpresas() {//
+      
+          Query q = conexao.createQuery("SELECT new "+src+"ListaAcaoDTO(a.id,a.conta,a.empresa,a.valorTransacao,a.quantidadeAcoesTransacao,a.dataTransacao,a.tipoTransacao,a.valorCorretagem) "
+                    + " FROM Acao a"
+                    + " ORDER BY a.id DESC");
+        return (ArrayList<ListaAcaoDTO>) q.getResultList();
+    }
+    
+    
     
     public Acao get(int id) {
         return conexao.find(Acao.class, id);

@@ -151,11 +151,15 @@ public class CadastroEmpresaMB implements Serializable {
     public String trocar() {
         status = EStatusCrud.INSERT;
 
+        InicializaEmpresa();
+        
         return "";
     }
 
     public String voltar() {
         status = EStatusCrud.VIEW;
+        
+        InicializaEmpresa();
         
         return "";
     }

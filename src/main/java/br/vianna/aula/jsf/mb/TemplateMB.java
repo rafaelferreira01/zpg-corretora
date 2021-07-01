@@ -38,5 +38,17 @@ public class TemplateMB {
     return "acoesTransacao?faces-redirect=true";
     }
     
+    public String historicoTransacoes(){
+    return "historicoTransacoes?faces-redirect=true";
+    }
+    
+    public String historicoTransacoesAdm(){
+    return "historicoTransacoesAdm?faces-redirect=true";
+    }
+    
+    public String operacoes(){
+    return "operacoes?faces-redirect=true";
+    }
+    
     
 }

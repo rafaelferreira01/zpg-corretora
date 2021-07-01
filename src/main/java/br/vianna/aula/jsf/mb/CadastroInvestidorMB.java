@@ -43,7 +43,7 @@ public class CadastroInvestidorMB  implements Serializable{
 //    @Autowired//injeção de dependencia - injetando usuario DAO
 //    UsuarioDao userD;//acho que pode apagr isso
     
-   
+   private double valorTransacao;
     
     private EStatusCrud status;
 
@@ -53,7 +53,8 @@ public class CadastroInvestidorMB  implements Serializable{
     private String nome,profissao,endereco,cpf;
 
 
-  
+    @Autowired
+    private LoginMB usuario;
 
     @Autowired
     private InvestidorDao investidorDao;
@@ -98,6 +99,16 @@ public class CadastroInvestidorMB  implements Serializable{
         listaInvestidor = getAllInvestidores();
 
     }
+
+    public double getValorTransacao() {
+        return valorTransacao;
+    }
+
+    public void setValorTransacao(double valorTransacao) {
+        this.valorTransacao = valorTransacao;
+    }
+    
+    
 
     public EStatusCrud getStatus() {
         return status;
@@ -249,6 +260,68 @@ public class CadastroInvestidorMB  implements Serializable{
 
         return "";
     }
+    
+    
+    
+    
+    public String sacar(int id) {
+        FacesContext ct = FacesContext.getCurrentInstance();
+        investidor = investidorDao.get(id);
+        Conta conta = investidor.getConta();
+        
+        if(conta.getSaldo() < valorTransacao){
+            ct.addMessage("", new FacesMessage("Saldo insuficiente!"));
+            
+            InicializaInvestidor();
+            this.valorTransacao = 0;
+            
+            return "";
+        } else if(valorTransacao <= 0){
+            
+            ct.addMessage("", new FacesMessage("Valor incorreto!"));
+            InicializaInvestidor();
+            this.valorTransacao = 0;
+            return "";
+        }else{
+        
+        conta.setSaldo(conta.getSaldo()-valorTransacao);
+        
+        investidorDao.save(investidor);
+        ct.addMessage("", new FacesMessage("Deposito sacada com sucesso! $"+valorTransacao));
+        usuario.getUser().getConta().setSaldo(conta.getSaldo());
+        InicializaInvestidor();
+        this.valorTransacao = 0;
+        return "";
+        }
+    }
+    
+    
+    public String depositar(int id) {
+        FacesContext ct = FacesContext.getCurrentInstance();
+        investidor = investidorDao.get(id);
+        Conta conta = investidor.getConta();
+        
+        if(valorTransacao <= 0){
+            
+            ct.addMessage("", new FacesMessage("Quantia insuficiente!"));
+            InicializaInvestidor();
+            this.valorTransacao = 0;
+            return "";
+        } else {
+        
+        conta.setSaldo(conta.getSaldo()+valorTransacao);
+        
+        investidorDao.save(investidor);
+        ct.addMessage("", new FacesMessage("Deposito realizado com sucesso! $"+valorTransacao));
+        usuario.getUser().getConta().setSaldo(conta.getSaldo());
+        InicializaInvestidor();
+        this.valorTransacao = 0;
+        return "";
+        }
+    }
+    
+    
+    
 }
 
     

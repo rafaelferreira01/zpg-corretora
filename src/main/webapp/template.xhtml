@@ -74,9 +74,9 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   href="#xxxx"> <i class="oi oi-cart"></i> <span>Relatorios (Admin)</span>
-                                </a>
+                                <h:form>
+                                    <h:commandLink class="nav-link" value="Histórico Transações" action="#{templateMB.historicoTransacoesAdm()}"/> 
+                                </h:form>
                             </li>
                         </h:panelGroup>
 
@@ -88,19 +88,25 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   href="#xxxx"> <i class="oi oi-cart"></i> <span>Relatórios</span>
-                                </a>
+                                <h:form>
+                                    <h:commandLink class="nav-link" value="Histórico de Ações" action="#{templateMB.historicoTransacoes()}"/> 
+                                </h:form>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <h:form>
+                                    <h:commandLink class="nav-link" value="Operações" action="#{templateMB.operacoes()}"/> 
+                                </h:form>
                             </li>
                         </h:panelGroup>
 
-                        <h:panelGroup rendered="#{loginMB.admin}">
+<!--                        <h:panelGroup rendered="#{loginMB.admin}">
                             <li class="nav-item">
                                 <a class="nav-link"
                                    href="#xxxx"> <i class="oi oi-cart"></i> <span>Usuários</span>
                                 </a>
                             </li>
-                        </h:panelGroup>
+                        </h:panelGroup>-->
 
                         <li class="nav-item" >
                             <h:form>

@@ -11,6 +11,7 @@ import br.vianna.aula.jsf.dao.InvestidorDao;
 import br.vianna.aula.jsf.model.acao.Acao;
 import br.vianna.aula.jsf.model.acao.ETipoTransacao;
 import br.vianna.aula.jsf.model.conta.Conta;
+import br.vianna.aula.jsf.model.dto.ListaAcaoDTO;
 import br.vianna.aula.jsf.model.dto.ListaEmpresaDTO;
 import br.vianna.aula.jsf.model.dto.UsuarioLogadoDTO;
 import br.vianna.aula.jsf.model.empresa.Empresa;
@@ -38,6 +39,9 @@ public class AcaoMB implements Serializable {
         private EStatusCrud status;
 
         
+    private ArrayList<ListaAcaoDTO> listaHistoricoTransacoes;
+    private ArrayList<ListaAcaoDTO> listaHistoricoTransacoesTodasEmpresas;
+    
     private UsuarioLogadoDTO user;
     private Empresa empresa;
     private int quantidadeAcao;
@@ -66,40 +70,19 @@ public class AcaoMB implements Serializable {
 
     public AcaoMB() {
         status = EStatusCrud.VIEW;
-
+       
         InicializaAcao();
+        
+        listaHistoricoTransacoes = new ArrayList<>();
+        listaHistoricoTransacoesTodasEmpresas = new ArrayList<>();
     }
 
     private void InicializaAcao() {
         acao = new Acao();
         
+        
     }
     
-    public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, int quantidadeAcao, Acao acao, AcaoDao acaoDao, LoginMB usuario, EmpresaDao empresaDao) {
-        this.status = status;
-        this.user = user;
-        this.empresa = empresa;
-        this.quantidadeAcao = quantidadeAcao;
-        this.acao = acao;
-        this.acaoDao = acaoDao;
-        this.usuario = usuario;
-        this.empresaDao = empresaDao;
-    }
-
-    public AcaoMB(EStatusCrud status, UsuarioLogadoDTO user, Empresa empresa, int quantidadeAcao, double valorTransacao, Acao acao, Investidor investidor, AcaoDao acaoDao, LoginMB usuario, InvestidorDao investDao, EmpresaDao empresaDao) {
-        this.status = status;
-        this.user = user;
-        this.empresa = empresa;
-        this.quantidadeAcao = quantidadeAcao;
-        this.valorTransacao = valorTransacao;
-        this.acao = acao;
-        this.investidor = investidor;
-        this.acaoDao = acaoDao;
-        this.usuario = usuario;
-        this.investDao = investDao;
-        this.empresaDao = empresaDao;
-    }
-
     public Investidor getInvestidor() {
         return investidor;
     }
@@ -108,9 +91,6 @@ public class AcaoMB implements Serializable {
         this.investidor = investidor;
     }
 
-    
-
-    
     public InvestidorDao getInvestDao() {
         return investDao;
     }
@@ -205,7 +185,77 @@ public class AcaoMB implements Serializable {
     public void setValorTransacao(double valorTransacao) {
         this.valorTransacao = valorTransacao;
     }
+
+    public ArrayList<ListaAcaoDTO> getListaHistoricoTransacoes() {
+        return listaHistoricoTransacoes;
+    }
+
+    public void setListaHistoricoTransacoes(ArrayList<ListaAcaoDTO> listaHistoricoTransacoes) {
+        this.listaHistoricoTransacoes = listaHistoricoTransacoes;
+    }
+
+    public CadastroEmpresaMB getEmpMB() {
+        return empMB;
+    }
+
+    public void setEmpMB(CadastroEmpresaMB empMB) {
+        this.empMB = empMB;
+    }
+
+    public CorretoraMB getCorretoraMB() {
+        return corretoraMB;
+    }
+
+    public void setCorretoraMB(CorretoraMB corretoraMB) {
+        this.corretoraMB = corretoraMB;
+    }
+
+    public ArrayList<ListaAcaoDTO> getListaHistoricoTransacoesTodasEmpresas() {
+        return listaHistoricoTransacoesTodasEmpresas;
+    }
+
+    public void setListaHistoricoTransacoesTodasEmpresas(ArrayList<ListaAcaoDTO> listaHistoricoTransacoesTodasEmpresas) {
+        this.listaHistoricoTransacoesTodasEmpresas = listaHistoricoTransacoesTodasEmpresas;
+    }
+
     
+    
+    
+    
+    
+    
+//    @PostConstruct
+//    public void init() {
+//        
+//        //se for inv
+//        if (usuario.isInvestidor()){
+//        investidor = investDao.get(usuario.getUser().getId());
+//        listaHistoricoTransacoes = buscaHistoricoTransacoes(investidor.getConta().getId());
+//        }
+//
+//    }
+    
+    public ArrayList<ListaAcaoDTO> buscaHistoricoTransacoes() {
+        
+        investidor = investDao.get(usuario.getUser().getId());
+        
+        
+        ArrayList<ListaAcaoDTO> listaHistoricoTransacoes = new ArrayList<>();
+
+        listaHistoricoTransacoes.addAll(acaoDao.buscaHistoricoTransacoes(investidor.getConta()));
+
+        return listaHistoricoTransacoes;
+    }
+    
+    public ArrayList<ListaAcaoDTO> buscaHistoricoTransacoesTodasEmpresas() {
+        
+        
+        ArrayList<ListaAcaoDTO> listaHistoricoTransacoesTodasEmpresas = new ArrayList<>();
+
+        listaHistoricoTransacoesTodasEmpresas.addAll(acaoDao.buscaHistoricoTransacoesTodasEmpresas());
+
+        return listaHistoricoTransacoesTodasEmpresas;
+    }
     
     
     ///////////////////////////////////////////
@@ -220,6 +270,7 @@ public class AcaoMB implements Serializable {
         
         if(conta.getSaldo() < valorTransacao){
             InicializaAcao();
+            this.quantidadeAcao = 0;
             status = EStatusCrud.VIEW;
 
             ct.addMessage("", new FacesMessage("Saldo insuficiente"));
@@ -227,16 +278,24 @@ public class AcaoMB implements Serializable {
             return "";
         } else if(this.quantidadeAcao > empresa.getQuantAtualAcoes()){
             InicializaAcao();
+            this.quantidadeAcao = 0;
             status = EStatusCrud.VIEW;
 
-            this.quantidadeAcao = 0;
             ct.addMessage("", new FacesMessage("Quantidade de Ações indisponivel"));
 
             return "";
         
-        }else{
-        
-        
+        }else if (this.quantidadeAcao <= 0) {
+            this.quantidadeAcao = 0;
+            InicializaAcao();
+            status = EStatusCrud.VIEW;
+
+            
+            ct.addMessage("", new FacesMessage("Escolha a quantidade de ações que quer comprar."));
+
+            return "";
+        } else {
+
         //populando objeto acao
         empresa.setQuantAtualAcoes(empresa.getQuantAtualAcoes()-this.quantidadeAcao);
         
@@ -247,13 +306,10 @@ public class AcaoMB implements Serializable {
         acao.setConta(conta);
         acao.setQuantidadeAcoesTransacao(this.quantidadeAcao);
         
-        //////////alocrre
-        
-        
         
         //calcula valor da corretagem
         double valorCorretagem = corretoraMB.calcularCorretagem(valorTransacao);
-        
+        acao.setValorCorretagem(valorCorretagem);
         //subtrai a corretagem do valor final
         double valorFinal = valorTransacao + valorCorretagem;
         
@@ -263,25 +319,21 @@ public class AcaoMB implements Serializable {
         //salva na conta do investidor
         conta.setSaldo(conta.getSaldo()-valorFinal);
         
-        
-        
-        
-//        conta.setSaldo(conta.getSaldo()-valorTransacao);
-        
-        //
         investDao.save(investidor);//atualizando investidor
         acaoDao.save(acao);//atualizando acao
         
         
         //atualizando o DTO que esta exibindo as informacoes no menu - só aparece depois que loga novamente
-        
+        this.quantidadeAcao = 0;
         InicializaAcao();
         status = EStatusCrud.VIEW;
         
         usuario.getUser().getConta().setSaldo(conta.getSaldo());//ver como atualiza objeto na sessao
         empMB.atualizarListasMetodo();
+        
         this.quantidadeAcao = 0;
-        ct.addMessage("", new FacesMessage("Ações compradas com sucesso!"));
+        InicializaAcao();
+        ct.addMessage("", new FacesMessage("Ações compradas com sucesso! $"+valorFinal));
 
         return "";
         }
@@ -301,14 +353,21 @@ public class AcaoMB implements Serializable {
         
         if(this.quantidadeAcao > quantidadeAtualEspecifica){
             InicializaAcao();
+            this.quantidadeAcao = 0;
             status = EStatusCrud.VIEW;
 
-            this.quantidadeAcao = 0;
             ct.addMessage("", new FacesMessage("Ações insuficientes"));
 
             return "";
-        } else {
-        
+        } else if(this.quantidadeAcao <= 0){
+            this.quantidadeAcao = 0;
+            InicializaAcao();
+            status = EStatusCrud.VIEW;
+
+            ct.addMessage("", new FacesMessage("Escolha a quantidade de ações que quer vender."));
+
+            return "";
+        }else{
         
         //populando objeto acao
         
@@ -323,7 +382,7 @@ public class AcaoMB implements Serializable {
         
         //calcula valor da corretagem
         double valorCorretagem = corretoraMB.calcularCorretagem(valorTransacao);
-        
+        acao.setValorCorretagem(valorCorretagem);
         //subtrai a corretagem do valor final
         double valorFinal = valorTransacao - valorCorretagem;
         
@@ -339,14 +398,14 @@ public class AcaoMB implements Serializable {
         
         
         //atualizando o DTO que esta exibindo as informacoes no menu - só aparece depois que loga novamente
-        
+        this.quantidadeAcao = 0;
         InicializaAcao();
         status = EStatusCrud.VIEW;
         
         usuario.getUser().getConta().setSaldo(conta.getSaldo());//ver como atualiza objeto na sessao
         empMB.atualizarListasMetodo();
-        this.quantidadeAcao = 0;
-        ct.addMessage("", new FacesMessage("Ações vendidas com com sucesso!"));
+        
+        ct.addMessage("", new FacesMessage("Ações vendidas com com sucesso! $"+valorFinal));
 
         return "";
         }

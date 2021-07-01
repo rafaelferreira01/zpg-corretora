@@ -3,65 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.vianna.aula.jsf.model.acao;
+package br.vianna.aula.jsf.model.dto;
 
+import br.vianna.aula.jsf.model.acao.ETipoTransacao;
 import br.vianna.aula.jsf.model.conta.Conta;
 import br.vianna.aula.jsf.model.empresa.Empresa;
-import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import java.util.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Leonardo
  */
-@Entity
-public class Acao {
+public class ListaAcaoDTO {
     
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Id
     private int id;
-    
-    @JoinColumn(name = "conta_id", referencedColumnName = "id")
-    @ManyToOne(optional = true, cascade=CascadeType.MERGE)
     private Conta conta;
-    
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, cascade=CascadeType.MERGE)
     private Empresa empresa;
-    
-    @NotNull
     private double valorTransacao;
-    
-    @NotNull
     private int quantidadeAcoesTransacao;
-    
-    @NotNull
-    @Temporal(TemporalType.DATE)
     private Date dataTransacao;
-    
-    @NotNull
-    @Enumerated(EnumType.STRING)//pra pegar a string do ENUM ao inves do indicie
     private ETipoTransacao tipoTransacao;
-
-    @NotNull
     private double valorCorretagem;
-    
-    public Acao() {
+
+    public ListaAcaoDTO() {
     }
 
-    public Acao(int id, Conta conta, Empresa empresa, double valorTransacao, int quantidadeAcoesTransacao, Date dataTransacao, ETipoTransacao tipoTransacao) {
+    public ListaAcaoDTO(int id, Conta conta, Empresa empresa, double valorTransacao, int quantidadeAcoesTransacao, Date dataTransacao, ETipoTransacao tipoTransacao) {
         this.id = id;
         this.conta = conta;
         this.empresa = empresa;
@@ -70,8 +37,8 @@ public class Acao {
         this.dataTransacao = dataTransacao;
         this.tipoTransacao = tipoTransacao;
     }
-
-    public Acao(int id, Conta conta, Empresa empresa, double valorTransacao, int quantidadeAcoesTransacao, Date dataTransacao, ETipoTransacao tipoTransacao, double valorCorretagem) {
+    
+    public ListaAcaoDTO(int id, Conta conta, Empresa empresa, double valorTransacao, int quantidadeAcoesTransacao, Date dataTransacao, ETipoTransacao tipoTransacao, double valorCorretagem) {
         this.id = id;
         this.conta = conta;
         this.empresa = empresa;
@@ -80,10 +47,6 @@ public class Acao {
         this.dataTransacao = dataTransacao;
         this.tipoTransacao = tipoTransacao;
         this.valorCorretagem = valorCorretagem;
-    }
-    
-    public int getQuantidadeAcoesTransacao() {
-        return quantidadeAcoesTransacao;
     }
 
     public double getValorCorretagem() {
@@ -94,10 +57,6 @@ public class Acao {
         this.valorCorretagem = valorCorretagem;
     }
     
-    public void setQuantidadeAcoesTransacao(int quantidadeAcoesTransacao) {
-        this.quantidadeAcoesTransacao = quantidadeAcoesTransacao;
-    }
-
     public int getId() {
         return id;
     }
@@ -130,6 +89,14 @@ public class Acao {
         this.valorTransacao = valorTransacao;
     }
 
+    public int getQuantidadeAcoesTransacao() {
+        return quantidadeAcoesTransacao;
+    }
+
+    public void setQuantidadeAcoesTransacao(int quantidadeAcoesTransacao) {
+        this.quantidadeAcoesTransacao = quantidadeAcoesTransacao;
+    }
+
     public Date getDataTransacao() {
         return dataTransacao;
     }
@@ -145,8 +112,6 @@ public class Acao {
     public void setTipoTransacao(ETipoTransacao tipoTransacao) {
         this.tipoTransacao = tipoTransacao;
     }
-
-    
     
     
 }
