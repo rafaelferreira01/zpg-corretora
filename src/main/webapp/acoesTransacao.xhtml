@@ -38,6 +38,10 @@
                     <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
                 
+                <p:column headerText="Corretagem por Ação">
+                    <h:outputText value="#{corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)}" />
+                </p:column>
+                
              
                 <p:column headerText="Vender">
                     <h:form>

@@ -55,6 +55,8 @@ public class CadastroEmpresaMB implements Serializable {
         
     ////////////////////////////////
     
+    @Autowired
+    private CorretoraMB corretoraMB;
     
     @Autowired
     private EmpresaDao empresaDao;

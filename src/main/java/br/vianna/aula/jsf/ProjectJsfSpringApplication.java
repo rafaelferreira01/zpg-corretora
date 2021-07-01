@@ -1,8 +1,10 @@
 package br.vianna.aula.jsf;
 
+import br.vianna.aula.jsf.dao.CorretoraDao;
 import br.vianna.aula.jsf.dao.InvestidorDao;
 import br.vianna.aula.jsf.dao.UsuarioDao;
 import br.vianna.aula.jsf.model.conta.Conta;
+import br.vianna.aula.jsf.model.corretora.Corretora;
 import br.vianna.aula.jsf.model.usuario.investidor.Investidor;
 import br.vianna.aula.jsf.model.usuario.ETipoUsuario;
 import br.vianna.aula.jsf.model.usuario.Usuario;
@@ -21,19 +23,33 @@ public class ProjectJsfSpringApplication implements CommandLineRunner{
 
     @Autowired//injeção de dependencia
     UsuarioDao userD;
-    
+//    
+//    @Autowired//injeção de dependencia
+//    InvestidorDao InvestD;
+        
     @Autowired//injeção de dependencia
-    InvestidorDao InvestD;
+    CorretoraDao corretoraD;
         
     @Override
     public void run(String... args) throws Exception {//vai ser executado sempre que o servidor subir
 //        System.out.println("Server ON!");
 ////        System.out.println("a::"+Utils.md5("a"));
 //        
+
+
+
+
 //        Usuario u = new Usuario(0, "Zezin", "ze@ze","ze", Utils.md5("123"), ETipoUsuario.ADMIN);
 //        userD.save(u);
+//
+//        Corretora c = new Corretora(0, 11, 2222, 333);
+//        corretoraD.save(c);
 //        
 //        
+
+
+
+
 ////        Conta c = new Conta();//cria a conta
 //        Investidor i = new Investidor("vagabundo", "rua das couves", "1212121212", "77777777",
 //                0, "PedrinIvstidor", "pedrin@pedr", "ped", Utils.md5("123"));///cria o investidor passando a conta

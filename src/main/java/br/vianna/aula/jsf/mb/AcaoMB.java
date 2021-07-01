@@ -59,6 +59,10 @@ public class AcaoMB implements Serializable {
     
     @Autowired
     private EmpresaDao empresaDao;
+    
+    @Autowired
+    private CorretoraMB corretoraMB;
+    
 
     public AcaoMB() {
         status = EStatusCrud.VIEW;
@@ -225,7 +229,8 @@ public class AcaoMB implements Serializable {
             InicializaAcao();
             status = EStatusCrud.VIEW;
 
-            ct.addMessage("", new FacesMessage("Quandtidade de Ações indisponivel"));
+            this.quantidadeAcao = 0;
+            ct.addMessage("", new FacesMessage("Quantidade de Ações indisponivel"));
 
             return "";
         
@@ -241,6 +246,8 @@ public class AcaoMB implements Serializable {
         acao.setDataTransacao(new Date());
         acao.setConta(conta);
         acao.setQuantidadeAcoesTransacao(this.quantidadeAcao);
+        
+        //////////alocrre
         
         conta.setSaldo(conta.getSaldo()-valorTransacao);
         
@@ -279,6 +286,7 @@ public class AcaoMB implements Serializable {
             InicializaAcao();
             status = EStatusCrud.VIEW;
 
+            this.quantidadeAcao = 0;
             ct.addMessage("", new FacesMessage("Ações insuficientes"));
 
             return "";
@@ -296,7 +304,17 @@ public class AcaoMB implements Serializable {
         acao.setConta(conta);
         acao.setQuantidadeAcoesTransacao(this.quantidadeAcao =- this.quantidadeAcao);
         
-        conta.setSaldo(conta.getSaldo()+valorTransacao);
+        //calcula valor da corretagem
+        double valorCorretagem = corretoraMB.calcularCorretagem(valorTransacao);
+        
+        //subtrai a corretagem do valor final
+        double valorFinal = valorTransacao - valorCorretagem;
+        
+        //salvar  na corretora
+        corretoraMB.salvarCorretagemVenda(valorCorretagem);
+        
+        //salva na conta do investidor
+        conta.setSaldo(conta.getSaldo()+valorFinal);
         
         //
         investDao.save(investidor);//atualizando investidor
