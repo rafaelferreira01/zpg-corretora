@@ -14,10 +14,11 @@
     </ui:define>
 
     <ui:define name="body">
-
+        <h4>DINHEIRO DA CORRETORA (Pra auxiliar na correção do trabalho): $#{corretoraMB.corretora.dinheiro}</h4>
         <h:panelGroup rendered="#{cadEmpMB.estaNaView()}">
             <h1>Venda de Ações</h1>
             <h2>Saldo: $#{loginMB.user.conta.saldo}</h2>
+            
             <h:messages style="color: green"   showDetail="false"/> 
             <h:form>     
                 <h:commandButton class="btn btn-dark" value="Ir para Compra" action="#{cadEmpMB.trocar()}"/>
@@ -34,18 +35,22 @@
                     <h:outputText value="#{empresa.quantAcoesCompradas}" />
                 </p:column>
 
-                <p:column headerText="Val Atual de Venda">
+<!--                <p:column headerText="Val Atual de Venda">
                     <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
                 
                 <p:column headerText="Corretagem por Ação">
                     <h:outputText value="#{corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)}" />
+                </p:column>-->
+                
+                <p:column headerText="Val Atual de Venda">
+                    <h:outputText value="#{empresa.valorAtualAcoes + corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)} (un: #{empresa.valorAtualAcoes} + co: #{corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)})" />
                 </p:column>
                 
              
                 <p:column headerText="Vender">
                     <h:form>
-                        <h:inputText size="8" value="#{acaoMB.quantidadeAcao}" />
+                        <h:inputText size="6" value="#{acaoMB.quantidadeAcao}" />
                         <!--<f:validateLongRange minimum="20" maximum="1000" />-->
                         
                         <h:commandLink style="color: blue; font-weight:bold" value="Vender" action="#{acaoMB.vender(empresa.id)}" />
@@ -75,14 +80,22 @@
                     <h:outputText value="#{empresa.quantAtualAcoes}" />
                 </p:column>
 
-                <p:column headerText="Val Atual de Compra">
+<!--                <p:column headerText="Val Atual de Compra">
                     <h:outputText value="#{empresa.valorAtualAcoes}" />
                 </p:column>
                 
-             
+                <p:column headerText="Corretagem por Ação">
+                    <h:outputText value="#{corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)}" />
+                </p:column>-->
+
+                <p:column headerText="Val Atual de Venda">
+                    <h:outputText value="#{empresa.valorAtualAcoes + corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)} (un: #{empresa.valorAtualAcoes} + co: #{corretoraMB.calcularCorretagem(empresa.valorAtualAcoes)})" />
+                </p:column>
+
+
                 <p:column headerText="Comprar">
                     <h:form>
-                        <h:inputText size="8" value="#{acaoMB.quantidadeAcao}" />
+                        <h:inputText size="6" value="#{acaoMB.quantidadeAcao}" />
                         <!--<f:validateLongRange minimum="20" maximum="1000" />-->
                         
                         <h:commandLink  style="color: green; font-weight:bold"  value="Comprar" action="#{acaoMB.comprar(empresa.id)}" />

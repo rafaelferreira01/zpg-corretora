@@ -67,7 +67,20 @@ public class CorretoraMB {
     
     
     
-    
+    void salvarCorretagemCompra(double valorFinalDaCorretagem) {
+
+//        double corretagemPercent = 50;//porcentagem
+//        
+//        double valorFinalDaCorretagem = (corretagemPercent * valorTransacao) / 100 ;
+        
+        corretora.setDinheiro(corretora.getDinheiro() + valorFinalDaCorretagem);
+        
+        corretoraDao.save(corretora);
+
+        System.out.println("Corretagem sobre transação foi salva no banco.");
+        
+//        return valorFinalDaCorretagem;
+    }
     
     
     
