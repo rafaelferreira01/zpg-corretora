@@ -249,7 +249,24 @@ public class AcaoMB implements Serializable {
         
         //////////alocrre
         
-        conta.setSaldo(conta.getSaldo()-valorTransacao);
+        
+        
+        //calcula valor da corretagem
+        double valorCorretagem = corretoraMB.calcularCorretagem(valorTransacao);
+        
+        //subtrai a corretagem do valor final
+        double valorFinal = valorTransacao + valorCorretagem;
+        
+        //salvar  na corretora
+        corretoraMB.salvarCorretagemCompra(valorCorretagem);
+        
+        //salva na conta do investidor
+        conta.setSaldo(conta.getSaldo()-valorFinal);
+        
+        
+        
+        
+//        conta.setSaldo(conta.getSaldo()-valorTransacao);
         
         //
         investDao.save(investidor);//atualizando investidor
